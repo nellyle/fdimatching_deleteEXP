@@ -1,0 +1,17 @@
+{\rtf1\fs24
+\trowd\trgaph75\trleft-75\intbl\trqc\clbrdrt\brdrs\cellx2016\clbrdrt\brdrs\cellx3312
+\ql \cell\qc (1)\cell\row
+\trowd\trgaph75\trleft-75\trqc\cellx2016\cellx3312
+\trowd\trgaph75\trleft-75\trqc\clbrdrb\brdrs\cellx2016\clbrdrb\brdrs\cellx3312
+\ql VARIABLES\cell\qc TFP2017\cell\row
+\trowd\trgaph75\trleft-75\trqc\cellx2016\cellx3312
+\ql \cell\qc \cell\row
+\ql r1vs0.FDI2016\cell\qc 0.222***\cell\row
+\ql \cell\qc (0.036)\cell\row
+\ql \cell\qc \cell\row
+\trowd\trgaph75\trleft-75\trqc\trbrdrb\brdrs\clbrdrb\brdrs\cellx2016\clbrdrb\brdrs\cellx3312
+\ql Observations\cell\qc 11,323\cell\row
+\pard\qc
+Standard errors in parentheses\par
+*** p<0.01, ** p<0.05, * p<0.1\par
+}
