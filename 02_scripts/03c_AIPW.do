@@ -15,10 +15,18 @@
 					PART 1:	??
 *******************************************************************************/
 
-*lets use AIPW* 
+	global S "OWN PORT"	// Dummies with TECH
+	global P "logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015"
+	
+*------------------------------------------------------------------------------*
+*	PART 1.1: Probit w/o TECH, using 3NN
+*------------------------------------------------------------------------------*
+
+cap drop osa1
+teffects aipw (logwages2017 c.($P) i.($S))(FDI2016 c.($P) i.($S)  ) , ///
+osample(osa1) 
+
 *AIPW bt type
-global S " OWN PORT"
-global P "logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015"
 
 drop osa1
 teffects aipw (TFP2017  i.($S) c.($P) )(FDITYPE2016  i.($S) c.($P) ) , osample(osa1)

@@ -32,8 +32,8 @@
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit)if TECH==1,	///
 					  nneighbor(3) osample(osa1) generate(p1)
 		
-	teffects overlap, ptlevel(1) saving($results\04_Robustness\TFP_3NN_TECH1.gph, replace)
-	graph export $results\04_Robustness\TFP_3NN_TECH1.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/04_Robustness/TFP_3NN_TECH1.gph, replace)
+	graph export $results/04_Robustness/TFP_3NN_TECH1.pdf, as(pdf) replace
 	// bad overlap
 	
 	tebalance summarize
@@ -53,8 +53,8 @@
 					  nneighbor(3) generate(p1)
 		
 	
-	teffects overlap, ptlevel(1) saving($results\04_Robustness\TFP_3NN_TECH2.gph, replace)
-	graph export $results\04_Robustness\TFP_3NN_TECH2.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/04_Robustness/TFP_3NN_TECH2.gph, replace)
+	graph export $results/04_Robustness/TFP_3NN_TECH2.pdf, as(pdf) replace
 	// bad overlap
 	
 	tebalance summarize
@@ -74,8 +74,8 @@
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit)if TECH==3 & osa1==0,	///
 					  nneighbor(3) generate(p1)
 		
-	teffects overlap, ptlevel(1) saving($results\04_Robustness\TFP_3NN_TECH3.gph, replace)
-	graph export $results\04_Robustness\TFP_3NN_TECH3.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/04_Robustness/TFP_3NN_TECH3.gph, replace)
+	graph export $results/04_Robustness/TFP_3NN_TECH3.pdf, as(pdf) replace
 	// bad overlap
 	
 	tebalance summarize
@@ -95,8 +95,8 @@
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit)if TECH==4 & osa1==0,	///
 					  nneighbor(3) generate(p1)
 		
-	teffects overlap, ptlevel(1) saving($results\04_Robustness\TFP_3NN_TECH4.gph, replace)
-	graph export $results\04_Robustness\TFP_3NN_TECH4.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/04_Robustness/TFP_3NN_TECH4.gph, replace)
+	graph export $results/04_Robustness/TFP_3NN_TECH4.pdf, as(pdf) replace
 	// bad overlap
 	
 	tebalance summarize
@@ -121,8 +121,8 @@
 					  nneighbor(3) generate(p1)
 
 					  
-	teffects overlap, ptlevel(1) saving($results\04_Robustness\TFP_3NN#dc_TECH1.gph, replace)
-	graph export $results\04_Robustness\TFP_3NN#dc_TECH1.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/04_Robustness/TFP_3NN#dc_TECH1.gph, replace)
+	graph export $results/04_Robustness/TFP_3NN#dc_TECH1.pdf, as(pdf) replace
 	// bad overlap
 	
 	tebalance summarize
@@ -149,8 +149,8 @@
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit) if TECH==1,	///
 					  nneighbor(3) osample(osa1) generate(p1)
 
-	teffects overlap, ptlevel(1) saving($results\04_Robustness\WAGES_3NN_TECH1.gph, replace)
-	graph export $results\04_Robustness\WAGES_3NN_TECH1.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/04_Robustness/WAGES_3NN_TECH1.gph, replace)
+	graph export $results/04_Robustness/WAGES_3NN_TECH1.pdf, as(pdf) replace
 	// bad overlap
 	
 	tebalance summarize
@@ -169,8 +169,8 @@
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit) if TECH==2 & osa1==0,	///
 					  nneighbor(3) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results\04_Robustness\WAGES_3NN_TECH2.gph, replace)
-	graph export $results\04_Robustness\WAGES_3NN_TECH2.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/04_Robustness/WAGES_3NN_TECH2.gph, replace)
+	graph export $results/04_Robustness/WAGES_3NN_TECH2.pdf, as(pdf) replace
 	// bad overlap
 	
 	tebalance summarize
@@ -190,8 +190,8 @@
 					  nneighbor(3) generate(p1)
 
 	
-	teffects overlap, ptlevel(1) saving($results\04_Robustness\WAGES_3NN_TECH3.gph, replace)
-	graph export $results\04_Robustness\WAGES_3NN_TECH3.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/04_Robustness/WAGES_3NN_TECH3.gph, replace)
+	graph export $results/04_Robustness/WAGES_3NN_TECH3.pdf, as(pdf) replace
 	// bad overlap
 	
 	tebalance summarize
@@ -211,8 +211,8 @@
 					  nneighbor(3) generate(p1)
 
 	
-	teffects overlap, ptlevel(1) saving($results\04_Robustness\WAGES_3NN_TECH4.gph, replace)
-	graph export $results\04_Robustness\WAGES_3NN_TECH4.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/04_Robustness/WAGES_3NN_TECH4.gph, replace)
+	graph export $results/04_Robustness/WAGES_3NN_TECH4.pdf, as(pdf) replace
 	// bad overlap
 	
 	tebalance summarize
@@ -236,8 +236,8 @@
 					  nneighbor(3) generate(p1)
 
 					  
-	teffects overlap, ptlevel(1) saving($results\04_Robustness\WAGES_3NN#dc_TECH1.gph, replace)
-	graph export $results\04_Robustness\WAGES_3NN#dc_TECH1.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/04_Robustness/WAGES_3NN#dc_TECH1.gph, replace)
+	graph export $results/04_Robustness/WAGES_3NN#dc_TECH1.pdf, as(pdf) replace
 	// bad overlap
 	
 	tebalance summarize
