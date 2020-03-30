@@ -48,8 +48,8 @@
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit) if osa1==0,	///
 					  nneighbor(5) caliper(.05)  generate(p1) 
 	
-	teffects overlap, ptlevel(1) saving($results\03b_NNM\WAGES_overl_nn5.gph, replace)
-	graph export $results\03b_NNM\WAGES_overl_nn5.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03b_NNM/WAGES_overl_nn5.gph, replace)
+	graph export $results/03b_NNM/WAGES_overl_nn5.pdf, as(pdf) replace
 	// Much better overlap
 	
 	tebalance summarize
@@ -72,8 +72,8 @@
 					 (FDI2016 i.($D)##c.($C), probit) if osa1==0,	///
 					  nneighbor(5) caliper(.05) generate(p1) 
 
-	teffects overlap, ptlevel(1) saving($results\03b_NNM\WAGES_overl_nn5#cd.gph, replace)
-	graph export $results\03b_NNM\WAGES_overl_nn5#cd.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03b_NNM/WAGES_overl_nn5#cd.gph, replace)
+	graph export $results/03b_NNM/WAGES_overl_nn5#cd.pdf, as(pdf) replace
 	// Much better overlap
 	
 	tebalance summarize
@@ -103,8 +103,8 @@
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit) if osa1==0,	///
 					  nneighbor(5) caliper(.05)  generate(p1) 
 	
-	teffects overlap, ptlevel(1) saving($results\03b_NNM\TFP_overl_nn5.gph, replace)
-	graph export $results\03b_NNM\TFP_overl_nn5.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03b_NNM/TFP_overl_nn5.gph, replace)
+	graph export $results/03b_NNM/TFP_overl_nn5.pdf, as(pdf) replace
 	// Much better overlap
 	
 	tebalance summarize
@@ -126,8 +126,8 @@
 					 (FDI2016 i.($D)##c.($C), probit) if osa1==0,	///
 					  nneighbor(5) caliper(.05) generate(p1) 
 
-	teffects overlap, ptlevel(1) saving($results\03b_NNM\TFP_overl_nn5#cd.gph, replace)
-	graph export $results\03b_NNM\TFP_overl_nn5#cd.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03b_NNM/TFP_overl_nn5#cd.gph, replace)
+	graph export $results/03b_NNM/TFP_overl_nn5#cd.pdf, as(pdf) replace
 	// Much better overlap
 	
 	tebalance summarize

@@ -244,8 +244,8 @@ tebalance summarize
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 /*EXP2015*/ RD2015),	///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results\overl_log_noEXP.gph, replace)
-	graph export $results\overl_log_noEXP.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/overl_log_noEXP.gph, replace)
+	graph export $results/overl_log_noEXP.pdf, as(pdf) replace
 	// Ok overlap except left-hand tail.
 	
 	tebalance summarize
@@ -260,8 +260,8 @@ tebalance summarize
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 /*EXP2015*/ RD2015),	///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results\overl_log_noTECHEXP.gph, replace)
-	graph export $results\overl_log_noTECHEXP.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/overl_log_noTECHEXP.gph, replace)
+	graph export $results/overl_log_noTECHEXP.pdf, as(pdf) replace
 	// Ok overlap except left-hand tail.
 	
 	tebalance summarize
@@ -276,8 +276,8 @@ tebalance summarize
 					  logwages2015 TFP2015 /*logemp2015*/ DEBTS2015 EXP2015 RD2015),	///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results\overl_log_noTECHemp.gph, replace)
-	graph export $results\overl_log_noTECHemp.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/overl_log_noTECHemp.gph, replace)
+	graph export $results/overl_log_noTECHemp.pdf, as(pdf) replace
 	// Ok overlap, but tails still not so good.
 	
 	tebalance summarize
@@ -292,8 +292,8 @@ tebalance summarize
 					  logwages2015 TFP2015 /*logemp2015*/ DEBTS2015 /*EXP2015*/ RD2015),	///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results\overl_log_noTECHEXPemp.gph, replace)
-	graph export $results\overl_log_noTECHEXPemp.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/overl_log_noTECHEXPemp.gph, replace)
+	graph export $results/overl_log_noTECHEXPemp.pdf, as(pdf) replace
 	// Very good overlap.
 	
 	tebalance summarize
@@ -322,8 +322,8 @@ tebalance summarize
 	tebalance summarize
 	// SD catastrophy. VR fine.
 					  
-	teffects overlap, ptlevel(1) saving($results\overl_prob_comp1.gph, replace)
-	graph export $results\overl_prob_comp1.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/overl_prob_comp1.gph, replace)
+	graph export $results/overl_prob_comp1.pdf, as(pdf) replace
 	// Catastrophic overlap
 
 	
@@ -336,8 +336,8 @@ tebalance summarize
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit),	///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results\overl_prob_noTECH.gph, replace)
-	graph export $results\overl_prob_noTECH.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/overl_prob_noTECH.gph, replace)
+	graph export $results/overl_prob_noTECH.pdf, as(pdf) replace
 	// Much better overlap
 	
 	tebalance summarize
@@ -353,8 +353,8 @@ tebalance summarize
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 /*EXP2015*/ RD2015, probit),	///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results\overl_prob_noEXP.gph, replace)
-	graph export $results\overl_prob_noEXP.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/overl_prob_noEXP.gph, replace)
+	graph export $results/overl_prob_noEXP.pdf, as(pdf) replace
 	// Ok overlap except left-hand tail.
 	
 	tebalance summarize
@@ -371,8 +371,8 @@ tebalance summarize
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 /*EXP2015*/ RD2015, probit),	///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results\overl_prob_noTECHEXP.gph, replace)
-	graph export $results\overl_prob_noTECHEXP.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/overl_prob_noTECHEXP.gph, replace)
+	graph export $results/overl_prob_noTECHEXP.pdf, as(pdf) replace
 	// Ok overlap except left-hand tail.
 	
 	tebalance summarize
@@ -387,8 +387,8 @@ tebalance summarize
 					  logwages2015 TFP2015 /*logemp2015*/ DEBTS2015 EXP2015 RD2015, probit),	///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results\overl_prob_noTECHemp.gph, replace)
-	graph export $results\overl_prob_noTECHemp.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/overl_prob_noTECHemp.gph, replace)
+	graph export $results/overl_prob_noTECHemp.pdf, as(pdf) replace
 	// Ok overlap, but tails still not so good.
 	
 	tebalance summarize
@@ -404,8 +404,8 @@ tebalance summarize
 					  logwages2015 TFP2015 /*logemp2015*/ DEBTS2015 /*EXP2015*/ RD2015, probit),	///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results\overl_prob_noTECHEXPemp.gph, replace)
-	graph export $results\overl_prob_noTECHEXPemp.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/overl_prob_noTECHEXPemp.gph, replace)
+	graph export $results/overl_prob_noTECHEXPemp.pdf, as(pdf) replace
 	// Very good overlap, left-hand tail still not perfect but acceptable.
 	
 	tebalance summarize
