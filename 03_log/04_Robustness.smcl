@@ -1,0 +1,24 @@
+{smcl}
+{txt}{sf}{ul off}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Emilie\Documents\Emilie\Uni\Master\Nottingham\2_Appl_Microeconometrics\fdimatching_clean\03_log\04_Robustness.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}30 Mar 2020, 09:57:55
+{txt}
+{com}. 
+.                         do $scripts\04_Robustness
+{err}{p 0 4 2}
+file C:\Users\Emilie\Documents\Emilie\Uni\Master\Nottingham\2_Appl_Microeconometrics\fdimatching_clean\02_scripts\04_Robustness.do
+not found
+{p_end}
+{txt}{search r(601), local:r(601);}
+
+end of do-file
+
+{search r(601), local:r(601);}
+
+{com}. do "C:\Users\Emilie\AppData\Local\Temp\STD1884_000000.tmp"
+{txt}
+{com}.         cap log close
+{smcl}
+{com}{sf}{ul off}

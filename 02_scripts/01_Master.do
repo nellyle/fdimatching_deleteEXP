@@ -24,7 +24,7 @@
 *------------------------------------------------------------------------------*
 
 //	Adjust root file:	
-	global root	"C:\Users\Emilie\Desktop\fdimatching-master-cleanup"
+	global root	"C:\Users\Emilie\Documents\Emilie\Uni\Master\Nottingham\2_Appl_Microeconometrics\fdimatching_clean"
 
 	global input	"$root\01_input"
 	global scripts	"$root\02_scripts"
@@ -58,29 +58,62 @@
 *------------------------------------------------------------------------------*
 	
 	cap log close
-	log using $log\03_PSM, replace
+	log using $log\03a_PSM, replace
 
-			do $scripts\03_PSM
+			do $scripts\03a_PSM
 	
 	log close
-	translate $log\03_PSM.smcl $log\03_PSM.pdf , ///
+	translate $log\03a_PSM.smcl $log\03a_PSM.pdf , ///
 	trans(smcl2pdf) replace 	
 	
-	erase $log\03_PSM.smcl
+	erase $log\03a_PSM.smcl
 
 *------------------------------------------------------------------------------*
 *	PART 3.2: NNM
 *------------------------------------------------------------------------------*
 
+	cap log close
+	log using $log\03b_NNM, replace
+
+			do $scripts\03b_NNM
+	
+	log close
+	translate $log\03b_NNM.smcl $log\03b_NNM.pdf , ///
+	trans(smcl2pdf) replace 	
+	
+	erase $log\03b_NNM.smcl
+
+
 *------------------------------------------------------------------------------*
 *	PART 3.3: AIPW
 *------------------------------------------------------------------------------*
+
+	cap log close
+	log using $log\03c_AIPW, replace
+
+			do $scripts\03c_AIPW
+	
+	log close
+	translate $log\03c_AIPW.smcl $log\03c_AIPW.pdf , ///
+	trans(smcl2pdf) replace 	
+	
+	erase $log\03c_AIPW.smcl
 	
 	
 ********************************************************************************
 *			PART 4: Robustness Checks 
 ********************************************************************************
 
+	cap log close
+	log using $log\04a_Robustness, replace
+
+			do $scripts\04a_Robustness
+	
+	log close
+	translate $log\04a_Robustness.smcl $log\04a_Robustness.pdf , ///
+	trans(smcl2pdf) replace 	
+	
+	erase $log\04a_Robustness.smcl
 
 
 
