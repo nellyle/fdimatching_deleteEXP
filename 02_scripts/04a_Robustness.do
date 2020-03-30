@@ -20,10 +20,10 @@
 		--> in general not useful to divide into TECH subsamples			*/
 
 *------------------------------------------------------------------------------*
-*	PART 1.1: Probit w/o TECH, using 5NN and Caliper
+*	PART 1.1: Probit w/o TECH, using 3NN
 *------------------------------------------------------------------------------*
 
-** TECH==1	
+** TECH==1 (low)	
 *----------
 	cap drop osa1 
 	cap drop p1* 
@@ -32,14 +32,14 @@
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit)if TECH==1,	///
 					  nneighbor(3) osample(osa1) generate(p1)
 		
-	teffects overlap, ptlevel(1) saving($results\04_Robustness\TFP_5NNCal_TECH1.gph, replace)
-	graph export $results\04_Robustness\TFP_5NNCal_TECH1.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results\04_Robustness\TFP_3NN_TECH1.gph, replace)
+	graph export $results\04_Robustness\TFP_3NN_TECH1.pdf, as(pdf) replace
 	// bad overlap
 	
 	tebalance summarize
 	// SD very bad
 
-** TECH==2
+** TECH==2 (medium-low)
 *----------
 	cap drop osa1 
 	cap drop p1* 
@@ -53,15 +53,15 @@
 					  nneighbor(3) generate(p1)
 		
 	
-	teffects overlap, ptlevel(1) saving($results\04_Robustness\TFP_5NNCal_TECH2.gph, replace)
-	graph export $results\04_Robustness\TFP_5NNCal_TECH2.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results\04_Robustness\TFP_3NN_TECH2.gph, replace)
+	graph export $results\04_Robustness\TFP_3NN_TECH2.pdf, as(pdf) replace
 	// bad overlap
 	
 	tebalance summarize
 	// SD very bad
 
 	
-** TECH==3
+** TECH==3 (medium-high)
 *----------	
 	cap drop osa1 
 	cap drop p1* 
@@ -74,15 +74,15 @@
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit)if TECH==3 & osa1==0,	///
 					  nneighbor(3) generate(p1)
 		
-	teffects overlap, ptlevel(1) saving($results\04_Robustness\TFP_5NNCal_TECH3.gph, replace)
-	graph export $results\04_Robustness\TFP_5NNCal_TECH3.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results\04_Robustness\TFP_3NN_TECH3.gph, replace)
+	graph export $results\04_Robustness\TFP_3NN_TECH3.pdf, as(pdf) replace
 	// bad overlap
 	
 	tebalance summarize
 	// SD very bad
 
 	
-** TECH==4	
+** TECH==4 (high)
 *----------
 	cap drop osa1 
 	cap drop p1* 
@@ -95,8 +95,8 @@
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit)if TECH==4 & osa1==0,	///
 					  nneighbor(3) generate(p1)
 		
-	teffects overlap, ptlevel(1) saving($results\04_Robustness\TFP_5NNCal_TECH4.gph, replace)
-	graph export $results\04_Robustness\TFP_5NNCal_TECH4.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results\04_Robustness\TFP_3NN_TECH4.gph, replace)
+	graph export $results\04_Robustness\TFP_3NN_TECH4.pdf, as(pdf) replace
 	// bad overlap
 	
 	tebalance summarize

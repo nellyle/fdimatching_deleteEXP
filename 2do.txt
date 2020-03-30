@@ -1,5 +1,14 @@
-1. analyse one outcome for different techs subsamples on main model (ps matching nn5 caliper, no interaction), nelly georg, on 
-2. differentiate ATT, ATE, ATN in FDITYPES model without interactions, thea
-3. lit yonesse 
+SECTION 3
+- basic model
+1. NN1 basic (with and without TECH)
+--> why TECH is crap
+2. NN5+caliper TFP
+3.NN5+caliper  with wages
+4. AIPW 
+--> ATE, ATT
 
-wait for girma response 
+SECTION 4
+-TFP by type of FDI (w/o TECH)
+   --> multinom. probit/logit
+   --> ipw and aipw
+ 

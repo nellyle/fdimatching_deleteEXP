@@ -16,11 +16,6 @@
 *******************************************************************************/
 	
 	describe
-	
-//	Check categoricals
-	tab OWN
-	tab FDITYPE2016
-	tab TECH
 
 //	Covariance matrix
 	corr	
