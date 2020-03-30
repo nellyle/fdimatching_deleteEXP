@@ -24,7 +24,7 @@
 *------------------------------------------------------------------------------*
 
 //	Adjust root file:	
-	global root	"C:\Users\Emilie\Desktop\fdimatching-master-cleanup"
+	global root	"/Users/theazollner/Documents/GitHub/fdimatching_clean"
 
 	global input	"$root\01_input"
 	global scripts	"$root\02_scripts"
