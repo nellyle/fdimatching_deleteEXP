@@ -1,14 +1,29 @@
+- try out log TFP
+- solve tex-table riddle for covariate balance (emilie)
+
+
 SECTION 3
-- basic model
-1. NN1 basic (with and without TECH)
---> why TECH is crap
+----------
+- Figure 1 & Figure 2
+Overlap with and without TECH (for NN1 basic model)
+--> show why TECH is crap (Table in Appendix) 
+(Nelly)
+
+- table 1 - basic model
+1. NN1 basic (without TECH for TFP and Wages)
+(Thea)
+
+- table 2
 2. NN5+caliper TFP
-3.NN5+caliper  with wages
+3: IPW
 4. AIPW 
 --> ATE, ATT
+(Thea)
 
 SECTION 4
+----------
+- table 3 (if doesnt work in one table, put in two)
 -TFP by type of FDI (w/o TECH)
    --> multinom. probit/logit
    --> ipw and aipw
- 
+ (Georg)

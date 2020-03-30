@@ -22,7 +22,6 @@
 *	PART 1.1: Probit w/o TECH, using 3NN
 *------------------------------------------------------------------------------*
 
-*lets use AIPW* 
 cap drop osa1
 teffects aipw (logwages2017 c.($P) i.($S))(FDI2016 c.($P) i.($S)  ) , ///
 osample(osa1) 
