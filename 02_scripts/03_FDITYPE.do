@@ -1,5 +1,5 @@
 *------------------------------------------------------------------------------*
-*	PART 2.3: Estimation using psmatching with probit estimator: WAGES
+*	PART 3.4: Estimation using psmatching with probit estimator: WAGES
  ATT, ATE, ATN in FDITYPES model without interactions
 *------------------------------------------------------------------------------*
 ****----------------------------------AIWP-------------------------------------*
