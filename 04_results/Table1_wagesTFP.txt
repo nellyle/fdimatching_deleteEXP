@@ -1,0 +1,10 @@
+	(1)	(2)
+	wages	TFP
+VARIABLES	logwages2017	TFP2017
+		
+r1vs0.FDI2016	0.139**	0.287***
+	(0.067)	(0.040)
+		
+Observations	11,323	11,323
+Standard errors in parentheses		
+*** p<0.01, ** p<0.05, * p<0.1		
