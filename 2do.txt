@@ -1,5 +1,29 @@
-1. analyse one outcome for different techs subsamples on main model (ps matching nn5 caliper, no interaction), nelly georg, on 
-2. differentiate ATT, ATE, ATN in FDITYPES model without interactions, thea
-3. lit yonesse 
+- try out log TFP
+- solve tex-table riddle for covariate balance (emilie)
 
-wait for girma response 
+
+SECTION 3
+----------
+- Figure 1 & Figure 2
+Overlap with and without TECH (for NN1 basic model)
+--> show why TECH is crap (Table in Appendix) 
+(Nelly)
+
+- table 1 - basic model
+1. NN1 basic (without TECH for TFP and Wages)
+(Thea)
+
+- table 2
+2. NN5+caliper TFP
+3: IPW
+4. AIPW 
+--> ATE, ATT
+(Thea)
+
+SECTION 4
+----------
+- table 3 (if doesnt work in one table, put in two)
+-TFP by type of FDI (w/o TECH)
+   --> multinom. probit/logit
+   --> ipw and aipw
+ (Georg)
