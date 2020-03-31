@@ -22,10 +22,10 @@ Overlap with and without TECH (for NN1 basic model)
 
 SECTION 4
 ----------
-- table 3 (if doesnt work in one table, put in two)
+- table 3 (3 tables, can be coerved to 2)
 -TFP by type of FDI (w/o TECH)
-   --> multinom. probit/logit
-   --> ipw and aipw
+   --> AIPW, IPW with Multinomial logit
+   --> AIPW, IPW with seperate Logits
  (Georg)
 
 -show lack of robustness for tech subsampling
