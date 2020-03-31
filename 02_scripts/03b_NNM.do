@@ -69,14 +69,14 @@ cap drop osa1
 	
 	cap drop osa1 
 	cap drop p1* 
-	cap teffects psmatch (logwages2017) ///
+	teffects psmatch (logwages2017) ///
 					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
 					  nneighbor(5) caliper(.05) osample(osa1) generate(p1)
-					  // 5 observations violate caliper
+					  // have fewer than 6 propensity-score matches within caliper .05
 	
 	// Reestimate
-	teffects psmatch (logwages2017) ///
+	estto NN1: teffects psmatch (logwages2017) ///
 					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0,	///
 					  nneighbor(5) caliper(.05)  generate(p1) 
