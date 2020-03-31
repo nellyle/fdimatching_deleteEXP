@@ -27,3 +27,5 @@ SECTION 4
    --> multinom. probit/logit
    --> ipw and aipw
  (Georg)
+
+-show lack of robustness for tech subsampling
