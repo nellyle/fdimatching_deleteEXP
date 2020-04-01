@@ -7,8 +7,9 @@
 		
 		PURPOSE:	Perform Nearest-Neighbour Matching
 		
-		OUTLINE:	PART 1:	NN
-					PART 2:	5NN and Caliper
+		OUTLINE:	PART 1:	NN: Wages and TFP--> Table1
+					PART 2:	5NN and Caliper: Wages
+					PART 3: 5NN and Caliper; IPW; AIPW: TFP --> Table 2
 		
 														
 	
@@ -62,7 +63,6 @@ cap drop osa1
 	global D "OWN PORT" /*TECH*/
 	global C "logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015"
 		
-
 *------------------------------------------------------------------------------*
 *	PART 2.1: No interactions
 *------------------------------------------------------------------------------*	
@@ -76,7 +76,7 @@ cap drop osa1
 					  // have fewer than 6 propensity-score matches within caliper .05
 	
 	// Reestimate
-	estto NN1: teffects psmatch (logwages2017) ///
+	estto NN5: teffects psmatch (logwages2017) ///
 					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0,	///
 					  nneighbor(5) caliper(.05)  generate(p1) 
