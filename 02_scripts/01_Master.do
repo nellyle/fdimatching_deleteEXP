@@ -32,7 +32,23 @@
 	global results	"$root/04_results"
 	
 	use "$input/FDI_project"
-	
+
+*------------------------------------------------------------------------------*
+*	PART 1.2: Adjust variable labels
+*------------------------------------------------------------------------------*
+
+	label var OWN "Ownership"
+	label var TECH "Technology intensity"
+	label var PORT "Access to port"
+	label var logwages2015 "Log wages"
+	label var TFP2015 "TFP"
+	label var logemp2015 "Log employment"
+	label var DEBTS2015 "Log debts"
+	label var EXP2015 "Export intensity"
+	label var RD2015 "R&D dummy"
+	label var logwages2017 "Log wages"
+	label var TFP2017 "TFP"
+
 ********************************************************************************
 *			PART 2: Descriptive Analysis
 ********************************************************************************

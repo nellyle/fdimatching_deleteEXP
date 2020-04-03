@@ -90,7 +90,15 @@
 //			By treatment variable
 iebaltab 	TECH PORT ///
 			logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, ///
-			grpvar(FDI2016) save($results/02_Descriptive_Analysis/baltest_byfdi_pre.xlsx) replace
+			grpvar(FDI2016) ///
+			savetex("C:\Users\Emilie\Documents\Emilie\Uni\Master\Nottingham\2_Appl_Microeconometrics\fditex") ///
+			rowvarlabels texdoc replace
+
+iebaltab 	TECH PORT ///
+			logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, ///
+			grpvar(FDI2016) ///
+			save $results/02_Descriptive_Analysis/baltest_byfdi_pre.xlsx///
+			
 
 /*	--> Significant differnces betw. treatment and control group in all
 		respects even before treatment. 	*/
@@ -100,20 +108,6 @@ iebaltab 	TECH PORT ///
 			logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, ///
 			grpvar(FDITYPE2016) save($results/02_Descriptive_Analysis/baltest_byfditype_pre.xlsx) replace
 
-			
-	
-	
-			
-			
-		
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			
