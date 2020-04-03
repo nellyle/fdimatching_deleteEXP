@@ -10,6 +10,7 @@
 		
 		OUTLINE:	PART 1:	Complete Model
 					PART 2: Improved Model (w/o TECH)
+					PART 3: Figure Overlap w/ and w/o TECH
 														
 	
 ********************************************************************************
@@ -262,4 +263,47 @@
 	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_prob_noTECH#all.gph, replace)
 	graph export $results/03a_PSM/overl_prob_noTECH#all.pdf, as(pdf) replace
 	
+
+/*******************************************************************************
+					PART 3: Figure Overlap w/ and w/o TECH
+*******************************************************************************/
+
+// Using graphs of the two models above (NN1, probit)
+
+*========*
+* W/ TECH
+*========*
 	
+	cap drop osa1 
+	cap drop p1 	
+	cap teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN i.TECH PORT ///
+					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit),	///
+					  osample(osa1) generate(p1)		   
+	teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN i.TECH PORT ///
+					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit)	///
+					  if osa1 == 0				  		  
+	teffects overlap, ptlevel(1) xtitle("Propensity Score") ytitle("Density") title("Including Technology") legend(label(1 "No FDI") label(2 "FDI")) saving($results/03a_PSM/overl_prob_comp1.gph, replace)
+	graph export $results/03a_PSM/overl_prob_comp1.pdf, as(pdf) replace
+
+*========*
+* W/O TECH
+*========*
+	
+	cap drop osa1 
+	cap drop p1 
+	teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
+					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit),	///
+					  osample(osa1) generate(p1)  
+	teffects overlap, ptlevel(1) xtitle("Propensity Score") ytitle("Density") title("Excluding Technology") legend(label(1 "No FDI") label(2 "FDI")) saving($results/03a_PSM/overl_prob_noTECH.gph, replace)
+	graph export $results/03a_PSM/overl_prob_noTECH.pdf, as(pdf) replace
+	
+	
+	
+gr combine $results/03a_PSM/overl_prob_comp1.gph $results/03a_PSM/overl_prob_noTECH.gph, xsize(9) ysize(4.5) title("FIGURE 1 - Propensity Score Overlap") saving($results/03a_PSM/overl_figure1_TECHvsnoTECH.gph, replace)
+	graph export $results/03a_PSM/overl_figure1_TECHvsnoTECH.pdf, as(pdf) replace
+
+
+
