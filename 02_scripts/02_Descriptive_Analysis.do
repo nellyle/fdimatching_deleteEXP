@@ -9,7 +9,7 @@
 		
 		OUTLINE:	PART 1:	Overview
 					PART 2: Balance Tests
-					PART 3: 
+					PART 3: Figure TECH by FDI
 					
 ********************************************************************************
 					PART 1: Overview
@@ -102,11 +102,27 @@ iebaltab 	TECH PORT ///
 
 			
 	
-	
-			
-			
-		
-			
+/********************************************************************************
+					PART 3: Figure TECH by FDI
+*******************************************************************************/
+
+histogram TECH, discrete by (FDI2016, note("")) frequency subtitle("No FDI") subtitle("FDI") xtitle("Industry Technology Intensity") gap(30) xlabel(1 2 3 4) saving($results/02_Descriptive_Analysis/hist_TECHbyFDI.gph, replace)
+//FDI textboxes manually renamed
+graph export $results/02_Descriptive_Analysis/hist_TECHbyFDI.pdf, as(pdf) replace
+
+cap drop x
+cap drop fx*
+kdensity FDI2016, nograph generate(x fx)
+kdensity FDI2016 if TECH==1, nograph generate(fx0) at(x)
+kdensity FDI2016 if TECH==2, nograph generate(fx1) at(x)
+kdensity FDI2016 if TECH==3, nograph generate(fx2) at(x)
+kdensity FDI2016 if TECH==4, nograph generate(fx3) at(x)
+label var fx0 "Low-tech"
+label var fx1 "Medium low-tech"
+label var fx2 "Medium high-tech"
+label var fx3 "High-tech"
+line fx0 fx1 fx2 fx3 x, sort  ytitle(Density) xtitle(No FDI vs FDI) saving($results/02_Descriptive_Analysis/kdensity_FDIbyTECH.gph, replace)
+graph export $results/02_Descriptive_Analysis/kdensity_FDIbyTECH.pdf, as(pdf) replace
 			
 			
 			
