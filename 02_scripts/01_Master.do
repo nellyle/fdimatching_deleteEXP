@@ -24,29 +24,29 @@
 *------------------------------------------------------------------------------*
 
 //	Adjust root file:	
-	global root	"C:\Users\Emilie\Documents\Emilie\Uni\Master\Nottingham\2_Appl_Microeconometrics\fdimatching_clean"
+	global root	"C:/Users/Emilie/Documents/Emilie/Uni/Master/Nottingham/2_Appl_Microeconometrics/fdimatching_clean"
 
-	global input	"$root\01_input"
-	global scripts	"$root\02_scripts"
-	global log		"$root\03_log"
-	global results	"$root\04_results"
+	global input	"$root/01_input"
+	global scripts	"$root/02_scripts"
+	global log		"$root/03_log"
+	global results	"$root/04_results"
 	
-	use "$input\FDI_project"
+	use "$input/FDI_project"
 	
 ********************************************************************************
 *			PART 2: Descriptive Analysis
 ********************************************************************************
 
 	cap log close
-	log using $log\02_Descriptive_Analysis, replace
+	log using $log/02_Descriptive_Analysis, replace
 
-			do $scripts\$02_scripts\02_Descriptive_Analysis
+			do $scripts/$02_scripts/02_Descriptive_Analysis
 	
 	log close
-	translate $log\02_Descriptive_Analysis.smcl $log\02_Descriptive_Analysis.pdf , ///
+	translate $log/02_Descriptive_Analysis.smcl $log/02_Descriptive_Analysis.pdf , ///
 	trans(smcl2pdf) replace 	
 	
-	erase $log\02_Descriptive_Analysis.smcl
+	erase $log/02_Descriptive_Analysis.smcl
 
 
 ********************************************************************************
@@ -54,34 +54,34 @@
 ********************************************************************************
 
 *------------------------------------------------------------------------------*
-*	PART 3.1: PSM
+*	PART 3.1: PSM (1 neighbour)
 *------------------------------------------------------------------------------*
 	
 	cap log close
-	log using $log\03a_PSM, replace
+	log using $log/03a_PSM, replace
 
-			do $scripts\03a_PSM
+			do $scripts/03a_PSM
 	
 	log close
-	translate $log\03a_PSM.smcl $log\03a_PSM.pdf , ///
+	translate $log/03a_PSM.smcl $log/03a_PSM.pdf , ///
 	trans(smcl2pdf) replace 	
 	
-	erase $log\03a_PSM.smcl
+	erase $log/03a_PSM.smcl
 
 *------------------------------------------------------------------------------*
-*	PART 3.2: NNM
+*	PART 3.2: NNM (>1 neighbours, including caliper specifications)
 *------------------------------------------------------------------------------*
 
 	cap log close
-	log using $log\03b_NNM, replace
+	log using $log/03b_NNM, replace
 
-			do $scripts\03b_NNM
+			do $scripts/03b_NNM
 	
 	log close
-	translate $log\03b_NNM.smcl $log\03b_NNM.pdf , ///
+	translate $log/03b_NNM.smcl $log/03b_NNM.pdf , ///
 	trans(smcl2pdf) replace 	
 	
-	erase $log\03b_NNM.smcl
+	erase $log/03b_NNM.smcl
 
 
 *------------------------------------------------------------------------------*
@@ -89,15 +89,15 @@
 *------------------------------------------------------------------------------*
 
 	cap log close
-	log using $log\03c_AIPW, replace
+	log using $log/03c_AIPW, replace
 
-			do $scripts\03c_AIPW
+			do $scripts/03c_AIPW
 	
 	log close
-	translate $log\03c_AIPW.smcl $log\03c_AIPW.pdf , ///
+	translate $log/03c_AIPW.smcl $log/03c_AIPW.pdf , ///
 	trans(smcl2pdf) replace 	
 	
-	erase $log\03c_AIPW.smcl
+	erase $log/03c_AIPW.smcl
 	
 	
 ********************************************************************************
@@ -105,15 +105,15 @@
 ********************************************************************************
 
 	cap log close
-	log using $log\04a_Robustness, replace
+	log using $log/04a_Robustness, replace
 
-			do $scripts\04a_Robustness
+			do $scripts/04a_Robustness
 	
 	log close
-	translate $log\04a_Robustness.smcl $log\04a_Robustness.pdf , ///
+	translate $log/04a_Robustness.smcl $log/04a_Robustness.pdf , ///
 	trans(smcl2pdf) replace 	
 	
-	erase $log\04a_Robustness.smcl
+	erase $log/04a_Robustness.smcl
 
 
 

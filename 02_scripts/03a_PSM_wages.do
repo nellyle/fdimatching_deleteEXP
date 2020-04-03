@@ -38,8 +38,8 @@ TESTTESTTEST
 					  osample(osa1) generate(p1)
 	// Insignificant ATE			
 
-	teffects overlap, ptlevel(1) saving($results\03a_PSM_wages\overl_log_comp1.gph, replace)
-	graph export $results\03a_PSM_wages\overl_log_comp1.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03a_PSM_wages/overl_log_comp1.gph, replace)
+	graph export $results/03a_PSM_wages/overl_log_comp1.pdf, as(pdf) replace
 	// Really bad overlap
 	
 	tebalance summarize
@@ -68,8 +68,8 @@ TESTTESTTEST
 	tebalance summarize
 	// SD catastrophy. VR fine.
 					  
-	teffects overlap, ptlevel(1) saving($results\03a_PSM_wages\overl_prob_comp1.gph, replace)
-	graph export $results\03a_PSM_wages\overl_prob_comp1.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03a_PSM_wages/overl_prob_comp1.gph, replace)
+	graph export $results/03a_PSM_wages/overl_prob_comp1.pdf, as(pdf) replace
 	// Really bad overlap
 
 	
@@ -177,8 +177,8 @@ TESTTESTTEST
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015),	///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results\03a_PSM_wages\overl_log_noTECH.gph, replace)
-	graph export $results\03a_PSM_wages\overl_log_noTECH.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03a_PSM_wages/overl_log_noTECH.gph, replace)
+	graph export $results/03a_PSM_wages/overl_log_noTECH.pdf, as(pdf) replace
 	// Much better overlap
 	
 	tebalance summarize
@@ -194,8 +194,8 @@ TESTTESTTEST
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit),	///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results\03a_PSM_wages\overl_prob_noTECH.gph, replace)
-	graph export $results\03a_PSM_wages\overl_prob_noTECH.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03a_PSM_wages/overl_prob_noTECH.gph, replace)
+	graph export $results/03a_PSM_wages/overl_prob_noTECH.pdf, as(pdf) replace
 	// Much better overlap
 	
 	tebalance summarize
@@ -212,8 +212,8 @@ TESTTESTTEST
 					 (FDI2016 i.($D)##i.($D) $C, probit), ///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results\03a_PSM_wages\overl_prob_noTECH#d.gph, replace)
-	graph export $results\03a_PSM_wages\overl_prob_noTECH#d.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03a_PSM_wages/overl_prob_noTECH#d.gph, replace)
+	graph export $results/03a_PSM_wages/overl_prob_noTECH#d.pdf, as(pdf) replace
 	
 	tebalance summarize
 	// SD better for some, worse for others but all still below 10%. VR fine.
@@ -228,8 +228,8 @@ TESTTESTTEST
 					 (FDI2016 i.($D) c.($C)##c.($C), probit), ///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results\03a_PSM_wages\overl_prob_noTECH#c.gph, replace)
-	graph export $results\03a_PSM_wages\overl_prob_noTECH#c.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03a_PSM_wages/overl_prob_noTECH#c.gph, replace)
+	graph export $results/03a_PSM_wages/overl_prob_noTECH#c.pdf, as(pdf) replace
 	
 	tebalance summarize
 	// SD now worse. VR fine.
@@ -253,8 +253,8 @@ TESTTESTTEST
 	tebalance summarize
 	// SD above 10% for some interactions. VR fine.
 					  
-	teffects overlap, ptlevel(1) saving($results\03a_PSM_wages\overl_prob_noTECH#all.gph, replace)
-	graph export $results\03a_PSM_wages\overl_prob_noTECH#all.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03a_PSM_wages/overl_prob_noTECH#all.gph, replace)
+	graph export $results/03a_PSM_wages/overl_prob_noTECH#all.pdf, as(pdf) replace
 	
 	
 
