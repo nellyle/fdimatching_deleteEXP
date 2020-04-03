@@ -87,14 +87,14 @@ outreg2 using $results/04_bytype/bytype_prob_1.tex, append dec(3) drop(i.OWN i.P
 
 *ipws sep logits
 cap drop osa1
-teffects ipw (TFP2017  FDI2016 c.($P) i.($S)  ) if FDITYPE2016==1 | FDITYPE2016==0, osample(osa1)
+teffects ipw (TFP2017)  (FDI2016 c.($P) i.($S)  ) if FDITYPE2016==1 | FDITYPE2016==0, osample(osa1)
 outreg2 using $results/4_bytype/bytype_ipw_1.tex, replace dec(3) 
 cap drop osa1
-teffects ipw (TFP2017  FDI2016 c.($P) i.($S)  ) if FDITYPE2016==2 | FDITYPE2016==0, osample(osa1)
+teffects ipw (TFP2017)  (FDI2016 c.($P) i.($S)  ) if FDITYPE2016==2 | FDITYPE2016==0, osample(osa1)
 outreg2 using $results/4_bytype/bytype_ipw_1.tex, append dec(3) 
 
 cap drop osa1
-teffects ipw (TFP2017   FDI2016 c.($P) i.($S)  ) if FDITYPE2016==3 | FDITYPE2016==0, osample(osa1)
+teffects ipw (TFP2017)   (FDI2016 c.($P) i.($S)  ) if FDITYPE2016==3 | FDITYPE2016==0, osample(osa1)
 outreg2 using $results/4_bytype/bytype_ipw_1.tex, append dec(3) 
 
 
