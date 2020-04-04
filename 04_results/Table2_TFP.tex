@@ -1,48 +1,18 @@
 \documentclass[]{article}
-\usepackage{adjustbox}
-\usepackage{pdflscape}
 \setlength{\pdfpagewidth}{8.5in} \setlength{\pdfpageheight}{11in}
 \begin{document}
-\begin{landscape}
 \centering
-\begin{adjustbox}{width=1.8\textwidth}
-\begin{tabular}{lcccccccc} \hline
- & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8) \\
- & IPW &  & IPWATET &  & AIWP &  &  &  \\
-VARIABLES & ATE & POmean & ATET & POmean & ATE & POmean & OME0 & OME1 \\ \hline
- &  &  &  &  &  &  &  &  \\
-logemp2015 &  &  &  &  &  &  & 0.000 & -0.002 \\
- &  &  &  &  &  &  & (0.001) & (0.002) \\
-logwages2015 &  &  &  &  &  &  & -0.000 & -0.000 \\
- &  &  &  &  &  &  & (0.001) & (0.001) \\
-TFP2015 &  &  &  &  &  &  & 0.998*** & 1.002*** \\
- &  &  &  &  &  &  & (0.002) & (0.002) \\
-EXP2015 &  &  &  &  &  &  & -0.081 & -0.107 \\
- &  &  &  &  &  &  & (0.090) & (0.093) \\
-1.PORT &  &  &  &  &  &  & -0.011 & 0.021 \\
- &  &  &  &  &  &  & (0.012) & (0.013) \\
-2.OWN &  &  &  &  &  &  & -0.019 & -0.021 \\
- &  &  &  &  &  &  & (0.021) & (0.029) \\
-3.OWN &  &  &  &  &  &  & -0.015 & -0.017 \\
- &  &  &  &  &  &  & (0.020) & (0.029) \\
-4.OWN &  &  &  &  &  &  & -0.003 & -0.036 \\
- &  &  &  &  &  &  & (0.020) & (0.028) \\
-2.TECH &  &  &  &  &  &  & -0.003 & -0.011 \\
- &  &  &  &  &  &  & (0.013) & (0.014) \\
-3.TECH &  &  &  &  &  &  & -0.005 & 0.016 \\
- &  &  &  &  &  &  & (0.012) & (0.015) \\
-r1vs0.FDI2016 & 0.285*** &  & 0.308*** &  & 0.309*** &  &  &  \\
- & (0.029) &  & (0.045) &  & (0.010) &  &  &  \\
-0.FDI2016 &  & 3.537*** &  & 3.307*** &  & 3.446*** &  &  \\
- &  & (0.026) &  & (0.053) &  & (0.022) &  &  \\
-Constant &  &  &  &  &  &  & 0.532*** & 0.834*** \\
- &  &  &  &  &  &  & (0.025) & (0.035) \\
- &  &  &  &  &  &  &  &  \\
- Observations & 11,323 & 11,323 & 11,323 & 11,323 & 9,418 & 9,418 & 9,418 & 9,418 \\ \hline
-\multicolumn{9}{c}{ Robust standard errors in parentheses} \\
-\multicolumn{9}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
+\tiny
+\begin{tabular}{lccccccccccc} \hline
+ & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8) & (9) & (10) & (11) \\
+ & IPW &  &  & IPWATET &  &  & AIWP &  &  &  &  \\
+VARIABLES & ATE & POmean & TME1 & ATET & POmean & TME1 & ATE & POmean & OME0 & OME1 & TME1 \\ \hline
+ &  &  &  &  &  &  &  &  &  &  &  \\
+Constant &  &  & -5.718*** &  &  & -5.718*** &  &  & 0.532*** & 0.834*** & -7.057*** \\
+ &  &  & (0.160) &  &  & (0.160) &  &  & (0.025) & (0.035) & (0.233) \\
+ & . &  &  &  &  &  &  &  &  &  &  \\
+ Observations & 11,323 & 11,323 & 11,323 & 11,323 & 11,323 & 11,323 & 9,418 & 9,418 & 9,418 & 9,418 & 9,418 \\ \hline
+\multicolumn{12}{c}{ Robust standard errors in parentheses} \\
+\multicolumn{12}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
 \end{tabular}
-\end{adjustbox}
-\end{landscape}
-\end{table}
 \end{document}

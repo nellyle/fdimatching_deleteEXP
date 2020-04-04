@@ -198,14 +198,16 @@ teffects overlap, ptlevel(1) saving($results/03b_NNM/TFP_overl_aipw.gph, replace
 	tebalance summarize
 
 //Table 2: Complete
-outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.1.tex, replace dec(3) //TME1: displays the coefficients for the logit treatment model; euqation from treatment effect
+outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.1.tex, replace dec(3) 
+//TME1: displays the coefficients for the logit treatment model; euqation from treatment effect
+//OME0 and OME1 represent the linear regression coefficients for the untreated and treated potential-outcome equations, respectively
 
 outreg2 [IPW IPWATET AIWP] using $results/Table2.1_TFP.tex, replace dec(3)
 
 //Drop Unecessary Stuff: 
 outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.tex, eqdrop("TME1") drop("OME1" "OME0") replace dec(3) // not working-why??
 
-outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, eqdrop("TME1") eqdrop("OME1" "OME0") replace dec(3) 
+outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace dec(3) 
 
 // Commands for LaTex- fit table on page:
 \usepackage{adjustbox}
