@@ -89,7 +89,6 @@ cap drop osa1
 	
 	tebalance summarize
 	outreg2 using $04_results/031_PSM_wages, replace dec(3) 
-	using $results\Table1.tex, replace dec(3) addnote("This is a note") stats(ATE POmean)
 	// SD way below 10% for all variables. VR fine.
 
 	
@@ -136,7 +135,7 @@ cap drop osa1
 						// 5 observations violate caliper
 	 
 	// Reestimate
-	eststo 5NN: teffects psmatch (TFP2017) ///
+	eststo NN: teffects psmatch (TFP2017) ///
 					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0,	///
 					  nneighbor(5) caliper(.05)  generate(p1) 
@@ -158,7 +157,7 @@ cap drop osa1
 						// 6  observations have fewer than 5 propensity-score matches within caliper .05
 	 
 	// Reestimate
-	eststo NN: teffects psmatch (TFP2017) ///
+	eststo N: teffects psmatch (TFP2017) ///
 					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0, atet	///
 					  nneighbor(5) caliper(.05)  generate(p1)
@@ -198,8 +197,29 @@ teffects overlap, ptlevel(1) saving($results/03b_NNM/TFP_overl_aipw.gph, replace
     
 	tebalance summarize
 
+//Table 2: Complete
+outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.1.tex, replace dec(3) //TME1: displays the coefficients for the logit treatment model; euqation from treatment effect
 
-outreg2 [5NN NN IPW IPWATET AIWP] using $results/Table2_TFP.tex, replace dec(3) 
+outreg2 [IPW IPWATET AIWP] using $results/Table2.1_TFP.tex, replace dec(3)
+
+//Drop Unecessary Stuff: 
+outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.tex, eqdrop("TME1") drop("OME1" "OME0") replace dec(3) // not working-why??
+
+outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, eqdrop("TME1") eqdrop("OME1" "OME0") replace dec(3) 
+
+// Commands for LaTex- fit table on page:
+\usepackage{adjustbox}
+\usepackage{pdflscape}
+//after begin document 
+\begin{landscape}
+\centering
+\begin{adjustbox}{width=1.8\textwidth}
+// at end of table 
+\end{tabular}
+\end{adjustbox}
+\end{landscape}
+\end{table}
+\end{document}
 *------------------------------------------------------------------------------*
 *	PART 3.2: Including interactions #dc
 *------------------------------------------------------------------------------*	
