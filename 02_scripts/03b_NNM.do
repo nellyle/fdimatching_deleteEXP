@@ -242,3 +242,20 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, eqdrop("TME1") eqdrop(
 	
 	tebalance summarize
 	// SD way below 10% for all variables. VR fine.	
+
+** output
+
+cap drop osa1
+	teffects ipw (TFP2017) (FDI2016 i.OWN /*i.TECH*/ PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015),  osample(osa1) 
+	outreg2 using $results/03b_NNM/NNM.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
+cap drop osa1	
+teffects ipw (TFP2017) ///
+						(FDI2016 i.OWN /*i.TECH*/ PORT ///
+						logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit), atet	///
+						 osample(osa1) 	
+	outreg2 using $results/03b_NNM/NNM.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
+cap drop osa1
+teffects aipw (TFP2017 logemp2015 logwages2015 TFP2015 EXP2015 i.PORT i.OW i.TECH)(FDI2016 logemp2015 	  logwages2015 TFP2015 EXP2015 i.PORT i.OWN i.TECH)
+
+	outreg2 using $results/03b_NNM/NNM.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon  eqdrop(OME0 OME1 TME1)
+
