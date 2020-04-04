@@ -110,15 +110,29 @@ iebaltab 	TECH PORT ///
 *	PART 3.1: Excluding TECH
 *------------------------------------------------------------------------------*
 
-*==========*
-* HISTOGRAM
-*==========*
+*============*
+* HISTOGRAM 1
+*============*
 
 histogram TECH, discrete by (FDI2016, note("")) frequency subtitle("No FDI") subtitle("FDI") xtitle("Industry Technology Intensity") gap(30) xlabel(1 2 3 4) saving($results/02_Descriptive_Analysis/hist_TECHbyFDI.gph, replace)
 //FDI textboxes manually renamed
 graph export $results/02_Descriptive_Analysis/hist_TECHbyFDI.pdf, as(pdf) replace
 
 // for TECH==1 and TECH==2 more or less equal, but TECH==3 and TECH==4 seem to cause problems
+
+*============*
+* HISTOGRAM 2
+*============*
+
+//Option 1 - Overlapping bars
+tab2 TECH FDI2016, col
+twoway hist TECH if FDI2016==0, color(navy%30) barw (0.2) || hist TECH if FDI2016==1, ///
+	legend(order(1 "control" 2 "treated")) xtitle(Industry Technology Intensity) color(maroon%30) barw(0.2) saving($results/02_Descriptive_Analysis/hist2_TECHbyFDI.gph, replace)
+graph export $results/02_Descriptive_Analysis/hist2_TECHbyFDI.pdf, as(pdf) replace
+
+// Option 2 - Bars next to each other
+byhist TECH, by(FDI2016) tw(xtitle("Industry Technology Intensity") legend(label(1 "No FDI") label(2 "FDI"))) width(0.4) 
+// don't know how to save yet!
 
 *=========*
 * KDENSITY
