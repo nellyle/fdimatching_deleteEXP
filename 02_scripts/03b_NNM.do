@@ -190,22 +190,74 @@ teffects overlap, ptlevel(1) saving($results/03b_NNM/TFP_overl_ipw.gph, replace)
 
 *------------------------AIWP---------------------------------------------------*
 cap drop osa1
-	eststo AIWP: teffects aipw (TFP2017 logemp2015 logwages2015 TFP2015 EXP2015 i.PORT i.OW i.TECH)(FDI2016 logemp2015 	  logwages2015 TFP2015 EXP2015 i.PORT i.OWN i.TECH) if TECH!=4 , osample(osa1)
+	eststo AIWP: teffects aipw (TFP2017 logemp2015 logwages2015 TFP2015 EXP2015 i.PORT i.OW i.TECH)(FDI2016 logemp2015 	  logwages2015 TFP2015 EXP2015 i.PORT i.OWN i.TECH), osample(osa1)
 
 teffects overlap, ptlevel(1) saving($results/03b_NNM/TFP_overl_aipw.gph, replace)
 	graph export $results/03b_NNM/TFP_overl_aipw.pdf, as(pdf) replace
     
 	tebalance summarize
-
+	
+_______________________________________________
 //Table 2: Complete
-outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.1.tex, replace dec(3) //TME1: displays the coefficients for the logit treatment model; euqation from treatment effect
+// Table with NN1 and NN5: mit Georg 
+//NN1:
+cap drop osa1 
+	cap drop p1* 
+	teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
+					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
+					  osample(osa1) generate(p1)	
+	// Generate Table 1 
+	outreg2 using $results/03b_NNM/Table1_TFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) eqdrop(OME0 OME1 OME2 OME3 TME1 TME2 TME3) //anpassen po means fehlen 
+	
+	teffects overlap, ptlevel(1) saving($results/03b_NNM/WAGES_overl_nn1.gph, replace)
+	graph export $results/03b_NNM/TFP_overl_nn1.pdf, as(pdf) replace
+	tebalance summarize
+//NN5:
+// ATE	
+	cap drop osa1 
+	cap drop p1* 
+	cap teffects psmatch (TFP2017) ///
+						(FDI2016 i.OWN /*i.TECH*/ PORT ///
+						logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
+						nneighbor(5) caliper(.05) osample(osa1) generate(p1)
+						// 5 observations violate caliper
+	 
+	// Reestimate
+	 teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
+					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0,	///
+					  nneighbor(5) caliper(.05)  generate(p1) 
+	
+	// Append Table 1 
+	outreg2 using $results/03b_NNM/Table1_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) eqdrop(OME0 OME1 OME2 OME3 TME1 TME2 TME3)
+	
+	
+
+	
+	
+	
+
+
+___________
+
+
+outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.1.tex, replace dec(3) 
+
+//TME1: displays the coefficients for the logit treatment model; euqation from treatment effect
+//OME0 and OME1 represent the linear regression coefficients for the untreated and treated potential-outcome equations, respectively
 
 outreg2 [IPW IPWATET AIWP] using $results/Table2.1_TFP.tex, replace dec(3)
 
 //Drop Unecessary Stuff: 
+
+outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.tex, drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(OME0 OME1 OME2 OME3 TME1 TME2 TME3), replace dec(3)
+
+outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.tex, drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(OME0 OME1 OME2 OME3 TME1 TME2 TME3)
+
 outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.tex, eqdrop("TME1") drop("OME1" "OME0") replace dec(3) // not working-why??
 
-outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, eqdrop("TME1") eqdrop("OME1" "OME0") replace dec(3) 
+outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace dec(3) 
 
 // Commands for LaTex- fit table on page:
 \usepackage{adjustbox}
