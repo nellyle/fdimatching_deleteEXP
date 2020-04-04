@@ -299,7 +299,10 @@
 					  osample(osa1) generate(p1)  
 	teffects overlap, ptlevel(1) xtitle("Propensity Score") ytitle("Density") title("Excluding Technology") legend(label(1 "No FDI") label(2 "FDI")) saving($results/03a_PSM/overl_prob_noTECH.gph, replace)
 	graph export $results/03a_PSM/overl_prob_noTECH.pdf, as(pdf) replace
-	
+
+*========*
+* COMBINE
+*========*
 	
 	
 gr combine $results/03a_PSM/overl_prob_comp1.gph $results/03a_PSM/overl_prob_noTECH.gph, xsize(9) ysize(4.5) title("FIGURE 1 - Propensity Score Overlap") saving($results/03a_PSM/overl_figure1_TECHvsnoTECH.gph, replace)

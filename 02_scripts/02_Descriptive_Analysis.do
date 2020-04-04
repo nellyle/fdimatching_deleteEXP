@@ -103,12 +103,26 @@ iebaltab 	TECH PORT ///
 			
 	
 /********************************************************************************
-					PART 3: Figure TECH by FDI
+					PART 3: Figure Justifying Exclusion
 *******************************************************************************/
+
+*------------------------------------------------------------------------------*
+*	PART 3.1: Excluding TECH
+*------------------------------------------------------------------------------*
+
+*==========*
+* HISTOGRAM
+*==========*
 
 histogram TECH, discrete by (FDI2016, note("")) frequency subtitle("No FDI") subtitle("FDI") xtitle("Industry Technology Intensity") gap(30) xlabel(1 2 3 4) saving($results/02_Descriptive_Analysis/hist_TECHbyFDI.gph, replace)
 //FDI textboxes manually renamed
 graph export $results/02_Descriptive_Analysis/hist_TECHbyFDI.pdf, as(pdf) replace
+
+// for TECH==1 and TECH==2 more or less equal, but TECH==3 and TECH==4 seem to cause problems
+
+*=========*
+* KDENSITY
+*=========*
 
 cap drop x
 cap drop fx*
@@ -121,18 +135,39 @@ label var fx0 "Low-tech"
 label var fx1 "Medium low-tech"
 label var fx2 "Medium high-tech"
 label var fx3 "High-tech"
+
 line fx0 fx1 fx2 fx3 x, sort  ytitle(Density) xtitle(No FDI vs FDI) saving($results/02_Descriptive_Analysis/kdensity_FDIbyTECH.gph, replace)
 graph export $results/02_Descriptive_Analysis/kdensity_FDIbyTECH.pdf, as(pdf) replace
+
+// especially TECH==4 seems to have very low probability of receiving FDI (Calculation: 0.13 of TECH==4 firms receive FDI)			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+*------------------------------------------------------------------------------*
+*	PART 3.2: Excluding EXP2015
+*------------------------------------------------------------------------------*
+
+*==========*
+* HISTOGRAM
+*==========*
+
+histogram EXP2015, by (FDI2016, note("")) frequency subtitle("No FDI") subtitle("FDI") xtitle("Export Intensity") gap(30) saving($results/02_Descriptive_Analysis/hist_TECHbyFDI.gph, replace)
+//FDI textboxes manually renamed
+graph export $results/02_Descriptive_Analysis/hist_EXPbyFDI.pdf, as(pdf) replace
+
+// No FDI very right-skewed whereas FDI seems to be more equally distributed for different Export Intensities
+
+*=========*
+* KDENSITY
+*=========*
+
+cap drop x
+cap drop fx*
+kdensity EXP2015, nograph generate(x fx)
+kdensity EXP2015 if FDI2016==0, nograph generate(fx0) at(x)
+kdensity EXP2015 if FDI2016==1, nograph generate(fx1) at(x)
+label var fx0 "No FDI"
+label var fx1 "FDI"
+line fx0 fx1 x, sort  ytitle(Density) xtitle(Export Intensity) saving($results/02_Descriptive_Analysis/kdensity_FDIbyTECH.gph, replace)
+graph export $results/02_Descriptive_Analysis/kdensity_FDIbyEXP.pdf, as(pdf) replace
+						
+// does not look too bad
 			
