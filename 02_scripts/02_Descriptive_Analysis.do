@@ -91,7 +91,7 @@
 iebaltab 	TECH PORT ///
 			logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, ///
 			grpvar(FDI2016) ///
-			savetex("C:\Users\Emilie\Documents\Emilie\Uni\Master\Nottingham\2_Appl_Microeconometrics\fditex") ///
+			savetex("C:\Users\Emilie\Documents\Emilie\Uni\Master\Nottingham\2_Appl_Microeconometrics\fditex\baltest_byfditype_pre.tex") ///
 			rowvarlabels texdoc replace
 
 iebaltab 	TECH PORT ///
