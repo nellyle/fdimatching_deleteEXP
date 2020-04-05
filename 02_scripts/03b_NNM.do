@@ -255,17 +255,80 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace 
 *------------------------------------------------------------------------------*
 *	Output (use)
 *------------------------------------------------------------------------------*
+// Table 1: NN1.(wages, TFP) NN5cal (TFP, wages)
 
+	// Wages NN1
+	cap drop osa1 
+	cap drop p1* 
+	cap teffects psmatch (logwages2017) ///
+					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
+					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
+					  osample(osa1) generate(p1)
+
+	// TFP NN1
+	cap drop osa1 
+	cap drop p1* 
+	cap teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
+					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
+					  osample(osa1) generate(p1)	
+					  
+// Wages NN5 caliper0.05: 
+
+
+
+//TFP NN5 caliper 0.05
+	// ATE	
+	cap drop osa1 
+	cap drop p1* 
+	cap teffects psmatch (TFP2017) ///
+						(FDI2016 i.OWN /*i.TECH*/ PORT ///
+						logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
+						nneighbor(5) caliper(.05) osample(osa1) generate(p1)
+						// 5 observations violate caliper
+	 
+	// Reestimate
+	teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
+					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0,	///
+					  nneighbor(5) caliper(.05)  generate(p1) 
+	
+	
+	// ATET
+cap drop osa1 
+	cap drop p1* 
+	teffects psmatch (TFP2017) ///
+						(FDI2016 i.OWN /*i.TECH*/ PORT ///
+						logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit), atet	///
+						nneighbor(5) caliper(.05) osample(osa1) generate(p1)
+						// 6  observations have fewer than 5 propensity-score matches within caliper .05
+	 
+	// Reestimate
+	eststo N: teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
+					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0, atet	///
+					  nneighbor(5) caliper(.05)  generate(p1)
+	
+	
+
+// Table 2: IPW, AIPW (TFP)
+//IWP:
+
+	//ATE
 cap drop osa1
-	teffects ipw (TFP2017) (FDI2016 i.OWN /*i.TECH*/ PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015),  osample(osa1) 
+	teffects ipw (TFP2017) (FDI2016 i.OWN /*i.TECH*/ PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015),  	osample(osa1) 
 	outreg2 using $results/03b_NNM/NNM.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
-cap drop osa1	
+	
+	//ATET
+	cap drop osa1	
 teffects ipw (TFP2017) ///
 						(FDI2016 i.OWN /*i.TECH*/ PORT ///
 						logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit), atet	///
 						 osample(osa1) 	
 	outreg2 using $results/03b_NNM/NNM.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
-cap drop osa1
+
+//AIWP
+	cap drop osa1
 teffects aipw (TFP2017 logemp2015 logwages2015 TFP2015 EXP2015 i.PORT i.OW i.TECH)(FDI2016 logemp2015 	  logwages2015 TFP2015 EXP2015 i.PORT i.OWN i.TECH)
 
 	outreg2 using $results/03b_NNM/NNM.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon  eqdrop(OME0 OME1 TME1)
