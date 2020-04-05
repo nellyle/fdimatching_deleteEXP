@@ -162,6 +162,7 @@ cap drop osa1
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0, atet	///
 					  nneighbor(5) caliper(.05)  generate(p1)
 	
+	outreg2 [NN N] using $results/03b_NNM/5NN_TFP.tex, replace dec(3)
 *------------------------IPW---------------------------------------------------*
 
 // ATE
@@ -197,50 +198,6 @@ teffects overlap, ptlevel(1) saving($results/03b_NNM/TFP_overl_aipw.gph, replace
     
 	tebalance summarize
 	
-_______________________________________________
-//Table 2: Complete
-// Table with NN1 and NN5: mit Georg 
-//NN1:
-cap drop osa1 
-	cap drop p1* 
-	teffects psmatch (TFP2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
-					  osample(osa1) generate(p1)	
-	// Generate Table 1 
-	outreg2 using $results/03b_NNM/Table1_TFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) eqdrop(OME0 OME1 OME2 OME3 TME1 TME2 TME3) //anpassen po means fehlen 
-	
-	teffects overlap, ptlevel(1) saving($results/03b_NNM/WAGES_overl_nn1.gph, replace)
-	graph export $results/03b_NNM/TFP_overl_nn1.pdf, as(pdf) replace
-	tebalance summarize
-//NN5:
-// ATE	
-	cap drop osa1 
-	cap drop p1* 
-	cap teffects psmatch (TFP2017) ///
-						(FDI2016 i.OWN /*i.TECH*/ PORT ///
-						logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
-						nneighbor(5) caliper(.05) osample(osa1) generate(p1)
-						// 5 observations violate caliper
-	 
-	// Reestimate
-	 teffects psmatch (TFP2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0,	///
-					  nneighbor(5) caliper(.05)  generate(p1) 
-	
-	// Append Table 1 
-	outreg2 using $results/03b_NNM/Table1_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) eqdrop(OME0 OME1 OME2 OME3 TME1 TME2 TME3)
-	
-	
-
-	
-	
-	
-
-
-___________
-
 
 outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.1.tex, replace dec(3) 
 
@@ -295,7 +252,9 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace 
 	tebalance summarize
 	// SD way below 10% for all variables. VR fine.	
 
-** output
+*------------------------------------------------------------------------------*
+*	Output (use)
+*------------------------------------------------------------------------------*
 
 cap drop osa1
 	teffects ipw (TFP2017) (FDI2016 i.OWN /*i.TECH*/ PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015),  osample(osa1) 
@@ -310,4 +269,51 @@ cap drop osa1
 teffects aipw (TFP2017 logemp2015 logwages2015 TFP2015 EXP2015 i.PORT i.OW i.TECH)(FDI2016 logemp2015 	  logwages2015 TFP2015 EXP2015 i.PORT i.OWN i.TECH)
 
 	outreg2 using $results/03b_NNM/NNM.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon  eqdrop(OME0 OME1 TME1)
+
+	
+	
+**output (dont use)_______________________________________________
+//Table 2: Complete
+// Table with NN1 and NN5: mit Georg 
+//NN1:
+cap drop osa1 
+	cap drop p1* 
+	teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
+					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
+					  osample(osa1) generate(p1)	
+	// Generate Table 1 
+	outreg2 using $results/03b_NNM/Table1_TFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) eqdrop(OME0 OME1 OME2 OME3 TME1 TME2 TME3) //anpassen po means fehlen 
+	
+	teffects overlap, ptlevel(1) saving($results/03b_NNM/WAGES_overl_nn1.gph, replace)
+	graph export $results/03b_NNM/TFP_overl_nn1.pdf, as(pdf) replace
+	tebalance summarize
+//NN5:
+// ATE	
+	cap drop osa1 
+	cap drop p1* 
+	cap teffects psmatch (TFP2017) ///
+						(FDI2016 i.OWN /*i.TECH*/ PORT ///
+						logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
+						nneighbor(5) caliper(.05) osample(osa1) generate(p1)
+						// 5 observations violate caliper
+	 
+	// Reestimate
+	 teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
+					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0,	///
+					  nneighbor(5) caliper(.05)  generate(p1) 
+	
+	// Append Table 1 
+	outreg2 using $results/03b_NNM/Table1_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) eqdrop(OME0 OME1 OME2 OME3 TME1 TME2 TME3)
+	
+	
+
+	
+	
+	
+
+
+___________
+
 
