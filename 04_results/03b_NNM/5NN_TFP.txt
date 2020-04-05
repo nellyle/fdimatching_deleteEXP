@@ -1,0 +1,10 @@
+	(1)	(2)
+	NN	N
+VARIABLES	TFP2017	TFP2017
+		
+r1vs0.FDI2016	0.279***	0.318***
+	(0.033)	(0.045)
+		
+Observations	11,317	11,317
+Standard errors in parentheses		
+*** p<0.01, ** p<0.05, * p<0.1		
