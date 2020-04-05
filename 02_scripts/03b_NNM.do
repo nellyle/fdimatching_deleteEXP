@@ -261,6 +261,7 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace 
 
 *------------------------------------WAGES-------------------------------------*
 	//NN1
+		// ATE
 	cap drop osa1 
 	cap drop p1* 
 	cap teffects psmatch (logwages2017) ///
@@ -270,6 +271,15 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace 
 					  
 	outreg2 using $results/03b_NNM/Table1_wagesTFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
 	
+		// ATET
+	cap drop osa1 
+	cap drop p1* 
+	cap teffects psmatch (logwages2017) ///
+						(FDI2016 i.OWN /*i.TECH*/ PORT ///
+						logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit), atet	///
+						 osample(osa1) generate(p1)
+
+	outreg2 using $results/03b_NNM/Table1_wagesTFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
 					  
 	// NN5 caliper0.05: 
 		// ATE
@@ -308,6 +318,7 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace 
 	
 *------------------------------------TFP---------------------------------------*
 	//NN1
+		//ATE
 	cap drop osa1 
 	cap drop p1* 
 	cap teffects psmatch (TFP2017) ///
@@ -315,6 +326,16 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace 
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
 					  osample(osa1) generate(p1)	
 	
+	outreg2 using $results/03b_NNM/Table1_wagesTFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
+	
+		// ATET
+	cap drop osa1 
+	cap drop p1* 
+	cap teffects psmatch (TFP2017) ///
+						(FDI2016 i.OWN /*i.TECH*/ PORT ///
+						logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit), atet	///
+						osample(osa1) generate(p1)
+
 	outreg2 using $results/03b_NNM/Table1_wagesTFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
 
 	//NN5 caliper 0.05
