@@ -7,9 +7,10 @@
 		
 		PURPOSE:	Perform Nearest-Neighbour Matching
 		
-		OUTLINE:	PART 1:	NN: Wages and TFP--> Table1
+		OUTLINE:	PART 1:	NN: Wages and TFP
 					PART 2:	5NN and Caliper: Wages
-					PART 3: 5NN and Caliper; IPW; AIPW: TFP --> Table 2
+					PART 3: 5NN and Caliper; IPW; AIPW: TFP 
+					PART 4: Output: Tables 1 & 2 
 		
 														
 	
@@ -23,7 +24,7 @@ to Install esttout run: ssc install estout, replace
 *------------------------------------------------------------------------------*//
 cap drop osa1 
 	cap drop p1* 
-	eststo wages:  cap teffects psmatch (logwages2017) ///
+	cap teffects psmatch (logwages2017) ///
 					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
 					  osample(osa1) generate(p1)
@@ -40,7 +41,7 @@ cap drop osa1
 *------------------------------------------------------------------------------*
 cap drop osa1 
 	cap drop p1* 
-	eststo TFP: cap teffects psmatch (TFP2017) ///
+	cap teffects psmatch (TFP2017) ///
 					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
 					  osample(osa1) generate(p1)			  
@@ -49,8 +50,7 @@ cap drop osa1
 	graph export $results/03b_NNM/TFP_overl_nn1.pdf, as(pdf) replace
 	tebalance summarize
 	
-	// Generate Table 1 
-	outreg2 [wages TFP] using $results/Table1_wagesTFP.tex, replace dec(3) 
+
 	
 	clear eststo 
 
@@ -88,7 +88,7 @@ cap drop osa1
 	// Much better overlap
 	
 	tebalance summarize
-	outreg2 using $04_results/031_PSM_wages, replace dec(3) 
+
 	// SD way below 10% for all variables. VR fine.
 
 	
@@ -135,7 +135,7 @@ cap drop osa1
 						// 5 observations violate caliper
 	 
 	// Reestimate
-	eststo NN: teffects psmatch (TFP2017) ///
+	teffects psmatch (TFP2017) ///
 					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0,	///
 					  nneighbor(5) caliper(.05)  generate(p1) 
@@ -157,12 +157,12 @@ cap drop osa1
 						// 6  observations have fewer than 5 propensity-score matches within caliper .05
 	 
 	// Reestimate
-	eststo N: teffects psmatch (TFP2017) ///
+	 teffects psmatch (TFP2017) ///
 					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0, atet	///
 					  nneighbor(5) caliper(.05)  generate(p1)
 	
-	outreg2 [NN N] using $results/03b_NNM/5NN_TFP.tex, replace dec(3)
+	
 *------------------------IPW---------------------------------------------------*
 
 // ATE
@@ -198,37 +198,6 @@ teffects overlap, ptlevel(1) saving($results/03b_NNM/TFP_overl_aipw.gph, replace
     
 	tebalance summarize
 	
-
-outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.1.tex, replace dec(3) 
-
-//TME1: displays the coefficients for the logit treatment model; euqation from treatment effect
-//OME0 and OME1 represent the linear regression coefficients for the untreated and treated potential-outcome equations, respectively
-
-outreg2 [IPW IPWATET AIWP] using $results/Table2.1_TFP.tex, replace dec(3)
-
-//Drop Unecessary Stuff: 
-
-outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.tex, drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(OME0 OME1 OME2 OME3 TME1 TME2 TME3), replace dec(3)
-
-outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.tex, drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(OME0 OME1 OME2 OME3 TME1 TME2 TME3)
-
-outreg2 [N NN IPW IPWATET AIWP] using $results/TFP_Table2.tex, eqdrop("TME1") drop("OME1" "OME0") replace dec(3) // not working-why??
-
-outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace dec(3) 
-
-// Commands for LaTex- fit table on page:
-\usepackage{adjustbox}
-\usepackage{pdflscape}
-//after begin document 
-\begin{landscape}
-\centering
-\begin{adjustbox}{width=1.8\textwidth}
-// at end of table 
-\end{tabular}
-\end{adjustbox}
-\end{landscape}
-\end{table}
-\end{document}
 *------------------------------------------------------------------------------*
 *	PART 3.2: Including interactions #dc
 *------------------------------------------------------------------------------*	
@@ -253,11 +222,14 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace 
 	// SD way below 10% for all variables. VR fine.	
 
 *------------------------------------------------------------------------------*
-*	Output (use)
+*	PART4: Output 
 *------------------------------------------------------------------------------*
 *------------------------------------------------------------------------------*
-*	Table 1: NN1.(wages, TFP) NN5cal (TFP, wages)
+*	Table 1/2: NN1.(wages, TFP) NN5cal (TFP, wages)
 *------------------------------------------------------------------------------*
+//TME1: displays the coefficients for the logit treatment model; euqation from treatment effect
+//OME0 and OME1 represent the linear regression coefficients for the untreated and treated potential-outcome equations, respectively
+
 
 *------------------------------------WAGES-------------------------------------*
 	//NN1
@@ -269,7 +241,7 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace 
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
 					  osample(osa1) generate(p1)	  
 					  
-	outreg2 using $results/03b_NNM/Table1_wagesTFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/03b_NNM/Table1.1_wages.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
 	
 		// ATET
 	cap drop osa1 
@@ -279,7 +251,7 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace 
 						logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit), atet	///
 						 osample(osa1) generate(p1)
 
-	outreg2 using $results/03b_NNM/Table1_wagesTFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/03b_NNM/Table1.1_wages.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1)
 					  
 	// NN5 caliper0.05: 
 		// ATE
@@ -297,7 +269,7 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace 
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0,	///
 					  nneighbor(5) caliper(.05)  generate(p1) 
 					  
-	outreg2 using $results/03b_NNM/Table1_wagesTFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/03b_NNM/Table1.1_wages.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
 		
 		//ATET
 	cap drop osa1 
@@ -313,7 +285,7 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace 
 					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0, atet	///
 					  nneighbor(5) caliper(.05)  generate(p1)
-	outreg2 using $results/03b_NNM/Table1_wagesTFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/03b_NNM/Table1.1_wages.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
 
 	
 *------------------------------------TFP---------------------------------------*
@@ -326,7 +298,7 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace 
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit),	///
 					  osample(osa1) generate(p1)	
 	
-	outreg2 using $results/03b_NNM/Table1_wagesTFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/03b_NNM/Table1.2_TFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
 	
 		// ATET
 	cap drop osa1 
@@ -336,7 +308,7 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace 
 						logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit), atet	///
 						osample(osa1) generate(p1)
 
-	outreg2 using $results/03b_NNM/Table1_wagesTFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/03b_NNM/Table1.2_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
 
 	//NN5 caliper 0.05
 		// ATE	
@@ -354,7 +326,7 @@ outreg2 [IPW IPWATET AIWP] using $results/Table2_TFP.tex, keep(FDI2016) replace 
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0,	///
 					  nneighbor(5) caliper(.05)  generate(p1) 
 					  
-	outreg2 using $results/03b_NNM/Table1_wagesTFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/03b_NNM/Table1.2_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
 	
 		// ATET
 cap drop osa1 
@@ -370,7 +342,7 @@ cap drop osa1
 					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit) if osa1==0, atet	///
 					  nneighbor(5) caliper(.05)  generate(p1)
-	outreg2 using $results/03b_NNM/Table1_wagesTFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/03b_NNM/Table1.2_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
 	
 *------------------------------------------------------------------------------*
 *	Table 2: IPW, AIPW (TFP)
@@ -380,7 +352,7 @@ cap drop osa1
 	//ATE
 cap drop osa1
 	teffects ipw (TFP2017) (FDI2016 i.OWN /*i.TECH*/ PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015),  	osample(osa1) 
-	outreg2 using $results/03b_NNM/NNM.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/03b_NNM/Table2_TFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
 	
 	//ATET
 	cap drop osa1	
@@ -388,12 +360,12 @@ teffects ipw (TFP2017) ///
 						(FDI2016 i.OWN /*i.TECH*/ PORT ///
 						logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, logit), atet	///
 						 osample(osa1) 	
-	outreg2 using $results/03b_NNM/NNM.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/03b_NNM/Table2_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon eqdrop(TME1) 
 
 //AIWP
 	cap drop osa1
-teffects aipw (TFP2017 logemp2015 logwages2015 TFP2015 EXP2015 i.PORT i.OW i.TECH)(FDI2016 logemp2015 	  logwages2015 TFP2015 EXP2015 i.PORT i.OWN i.TECH)
+teffects aipw (TFP2017 logemp2015 logwages2015 TFP2015 EXP2015 i.PORT i.OW i.TECH)(FDI2016 logemp2015 logwages2015 TFP2015 EXP2015 i.PORT i.OWN i.TECH)
 
-	outreg2 using $results/03b_NNM/NNM.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon  eqdrop(OME0 OME1 TME1)
+	outreg2 using $results/03b_NNM/Table2_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015) nocon  eqdrop(OME0 OME1 TME1)
 
 	
