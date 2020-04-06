@@ -288,7 +288,7 @@
 					 (FDI2016 i.OWN i.TECH PORT ///
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015)	///
 					  if osa1 == 0				  		  
-	teffects overlap, ptlevel(1) xtitle("Propensity Score") ytitle("Density") title("Including Technology") legend(label(1 "No FDI") label(2 "FDI")) saving($results/03a_PSM/overl_prob_comp1.gph, replace)
+	teffects overlap, ptlevel(1) xtitle("Propensity Score") ytitle("Density") title("Including Technology") legend(label(1 "No FDI") label(2 "FDI")) graphregion(fcolor(white)) graphregion(lcolor(white)) saving($results/03a_PSM/overl_prob_comp1.gph, replace)
 	graph export $results/03a_PSM/overl_prob_comp1.pdf, as(pdf) replace
 
 *========*
@@ -301,7 +301,7 @@
 					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015),	///
 					  osample(osa1) generate(p1)  
-	teffects overlap, ptlevel(1) xtitle("Propensity Score") ytitle("Density") title("Excluding Technology") legend(label(1 "No FDI") label(2 "FDI")) saving($results/03a_PSM/overl_prob_noTECH.gph, replace)
+	teffects overlap, ptlevel(1) xtitle("Propensity Score") ytitle("Density") title("Excluding Technology") legend(label(1 "No FDI") label(2 "FDI")) graphregion(fcolor(white)) graphregion(lcolor(white)) saving($results/03a_PSM/overl_prob_noTECH.gph, replace)
 	graph export $results/03a_PSM/overl_prob_noTECH.pdf, as(pdf) replace
 
 *========*
@@ -309,7 +309,7 @@
 *========*
 	
 	
-gr combine $results/03a_PSM/overl_prob_comp1.gph $results/03a_PSM/overl_prob_noTECH.gph, xsize(9) ysize(4.5) /*title("FIGURE 1 - Propensity Score Overlap")*/ saving($results/03a_PSM/overl_figure1_TECHvsnoTECH.gph, replace)
+gr combine $results/03a_PSM/overl_prob_comp1.gph $results/03a_PSM/overl_prob_noTECH.gph, xsize(9) ysize(4.5) /*title("FIGURE 1 - Propensity Score Overlap")*/ graphregion(fcolor(white)) saving($results/03a_PSM/overl_figure1_TECHvsnoTECH.gph, replace)
 	graph export $results/03a_PSM/overl_figure1_TECHvsnoTECH.pdf, as(pdf) replace
 
 *------------------------------------------------------------------------------*
