@@ -328,7 +328,7 @@ gr combine $results/03a_PSM/overl_prob_comp1.gph $results/03a_PSM/overl_prob_noT
 					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015),	///
 					  osample(osa1) generate(p1)  
-	teffects overlap, ptlevel(1) xtitle("Propensity Score") ytitle("Density") title("Without Interaction Terms") legend(label(1 "No FDI") label(2 "FDI")) saving($results/03a_PSM/overl_prob_noTECH.gph, replace)
+	teffects overlap, ptlevel(1) xtitle("Propensity Score") ytitle("Density") title("Without Interaction Terms") legend(label(1 "No FDI") label(2 "FDI")) graphregion(fcolor(white)) graphregion(lcolor(white)) saving($results/03a_PSM/overl_prob_noTECH.gph, replace)
 	graph export $results/03a_PSM/overl_prob_noTECH.pdf, as(pdf) replace
 
 
@@ -347,7 +347,7 @@ gr combine $results/03a_PSM/overl_prob_comp1.gph $results/03a_PSM/overl_prob_noT
 					 (FDI2016 i.($D)##c.($C) i.($D)#i.($D) c.($C)#c.($C), probit) ///
 					  if osa1 == 0
 	tebalance summarize		  
-	teffects overlap, ptlevel(1) xtitle("Propensity Score") ytitle("Density") title("Including Interaction Terms") legend(label(1 "No FDI") label(2 "FDI")) saving($results/03a_PSM/overl_prob_noTECH#all.gph, replace)
+	teffects overlap, ptlevel(1) xtitle("Propensity Score") ytitle("Density") title("Including Interaction Terms") legend(label(1 "No FDI") label(2 "FDI")) graphregion(fcolor(white)) graphregion(lcolor(white)) saving($results/03a_PSM/overl_prob_noTECH#all.gph, replace)
 	graph export $results/03a_PSM/overl_prob_noTECH#all.pdf, as(pdf) replace
 		
 	
@@ -356,5 +356,5 @@ gr combine $results/03a_PSM/overl_prob_comp1.gph $results/03a_PSM/overl_prob_noT
 *========*
 	
 	
-gr combine $results/03a_PSM/overl_prob_noTECH.gph $results/03a_PSM/overl_prob_noTECH#all.gph, xsize(9) ysize(4.5) /*title("FIGURE 1 - Propensity Score Overlap with interactions")*/ saving($results/03a_PSM/overl_figure1_TECHvsnoTECH_interactions.gph, replace)
+gr combine $results/03a_PSM/overl_prob_noTECH.gph $results/03a_PSM/overl_prob_noTECH#all.gph, xsize(9) ysize(4.5) /*title("FIGURE 1 - Propensity Score Overlap with interactions")*/ graphregion(fcolor(white)) saving($results/03a_PSM/overl_figure1_TECHvsnoTECH_interactions.gph, replace)
 	graph export $results/03a_PSM/overl_figure1_TECHvsnoTECH_interactions.pdf, as(pdf) replace
