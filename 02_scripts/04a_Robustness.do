@@ -257,16 +257,16 @@
 ** NN1
 *-----*
 
-psmatch2 FDI2016 (i.OWN PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015), outcome(TFP2017) logit ate
-// same ATE like standard model (logit w/o TECH)
+ psmatch2 FDI2016 (i.OWN PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015), outcome(TFP2017) logit ate
+ // same ATE like standard model (logit w/o TECH)
 
-pstest, both
-// 't-test for equality of means in the two samples' -> meaning H0: equality?
-// some differences significantly different from 0 -> typical probelmatic variables: PORT, logwages2015, logemp2015, EXP2015
-// bias: % difference of the sample means in the treated and non-treated (full or matched) sub-samples as a percentage of the square root of the average of the sample variances in the treated and non-treated groups
-// pstest by default considers balancing for the ATT (Average Treatment Effect on the Treated)
+ pstest, both
+ // 't-test for equality of means in the two samples' -> meaning H0: equality?
+ // some differences significantly different from 0 -> typical probelmatic variables: PORT, logwages2015, logemp2015, EXP2015
+ // bias: % difference of the sample means in the treated and non-treated (full or matched) sub-samples as a percentage of the square root of the average of the sample variances  in the treated and non-treated groups
+ // pstest by default considers balancing for the ATT (Average Treatment Effect on the Treated)
 
-// if excluding logemp2015 or EXP2015 quite good results (but excluding already TECH) -> for both only R&D2015 remained problematic
+ // if excluding logemp2015 or EXP2015 quite good results (but excluding already TECH) -> for both only R&D2015 remained problematic
 
 *-------------*
 ** NN5 CALIPER
@@ -278,3 +278,14 @@ pstest, both
  pstest, both
  
  // good (better) results except PORT (p=0.000) and EXP2015 (p=0.007)
+ 
+ 
+ generate EXP3=EXP2015^3
+ 
+ psmatch2 FDI2016 (i.OWN PORT TFP2015 logwages2015 logemp2015 EXP3 DEBTS2015 RD2015), outcome(TFP2017) neighbor(5) caliper(.05) logit ate
+
+ pstest, both
+ 
+// much better! problematic still PORT and one OWN category -> PORTEXP interaction term (also with cubic export) don't solve problem
+
+ 
