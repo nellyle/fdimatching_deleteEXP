@@ -131,7 +131,7 @@ twoway hist TECH if FDI2016==0, color(navy%30) barw (0.2) || hist TECH if FDI201
 graph export $results/02_Descriptive_Analysis/hist2_TECHbyFDI.pdf, as(pdf) replace
 
 // Option 2 - Bars next to each other
-byhist TECH, by(FDI2016) tw(xtitle("Industry Technology Intensity") legend(label(1 "No FDI") label(2 "FDI"))) width(0.4) 
+byhist TECH, by(FDI2016) tw(xtitle("Industry Technology Intensity") graphregion(fcolor(white)) legend(label(1 "No FDI") label(2 "FDI"))) width(0.4) 
 // don't know how to save yet!
 
 *=========*
