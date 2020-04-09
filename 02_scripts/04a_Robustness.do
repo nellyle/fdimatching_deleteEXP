@@ -288,4 +288,10 @@
  
 // much better! problematic still PORT and one OWN category -> PORTEXP interaction term (also with cubic export) don't solve problem
 
+generate emp2015=exp(logemp2015) 
+
+ psmatch2 FDI2016 (i.OWN PORT TFP2015 logwages2015 emp2015 EXP3 DEBTS2015 RD2015), outcome(TFP2017) neighbor(5) caliper(.05) logit ate
+
+ pstest, both
  
+ // much better than before!! should unlog employment! only PORT remains problematic (but for dummy maybe acceptable?)

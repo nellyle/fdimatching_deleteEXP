@@ -153,7 +153,29 @@
 	too good at explaining who gets the treatment. Redo this all with improved
 	model (i.e. excluding TECH). 				*/
 	
+
+*------------------------------------------------------------------------------*
+*	PART 1.5: Cubic exports, interacting problematic variables - Possible solution?
+*------------------------------------------------------------------------------*	
 	
+	
+	cap drop osa1 
+	cap drop p1* 
+	cap teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN TECHEXP TECHPORT PORTEXP PORT ///
+					  logwages2015 TFP2015 emp2015 DEBTS2015 EXP3 RD2015), 	///
+					  osample(osa1) generate(p1)
+	teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN TECHEXP TECHPORT PORTEXP PORT ///
+					  logwages2015 TFP2015 emp2015 DEBTS2015 EXP3 RD2015) if osa1==0, 	///
+					  generate(p1)	
+					  
+	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_log_cubic.gph, replace)
+	graph export $results/03a_PSM/overl_log_cubic.pdf, as(pdf) replace
+	// overlap not great, but better
+	
+	tebalance summarize
+	// SD okay
 	
 ********************************************************************************
 *					PART 2:	Improved Model (w/o TECH)
@@ -169,7 +191,8 @@
 *========*
 * Logit
 *========*	
-	cap drop osa1 
+
+	drop osa1 
 	cap drop p1 
 	teffects psmatch (TFP2017) ///
 					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
@@ -202,9 +225,6 @@
 	tebalance summarize
 	// SD way below 10% for all variables. VR fine.
 
-
-	
-	
 	
 	
 *------------------------------------------------------------------------------*
@@ -262,7 +282,7 @@
 					  
 	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_prob_noTECH#all.gph, replace)
 	graph export $results/03a_PSM/overl_prob_noTECH#all.pdf, as(pdf) replace
-	
+
 
 /*******************************************************************************
 					PART 3: Figure Overlap w/ and w/o TECH
