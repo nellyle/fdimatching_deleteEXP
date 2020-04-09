@@ -37,6 +37,9 @@ outreg2 using $results/04_bytype/bytype_mlog_1.tex, replace dec(3) drop(i.OWN i.
 tebalance summarize 
 *worst is 8% diff for independent, 0.7 for logemp
 
+
+
+
 /*c#i interactions
 cap drop osa1
 teffects aipw (TFP2017  i.($S)##c.($P) )(FDITYPE2016  i.($S)##c.($P) ) , osample(osa1)
@@ -55,16 +58,39 @@ tebalance summarize
 
 
 *seperate logits
+
+*AIPW Logit type1 
 cap drop osa1
 teffects aipw (TFP2017   i.($S) c.($P) )(FDI2016 c.($P) i.($S)  ) if FDITYPE2016==1 | FDITYPE2016==0, osample(osa1)
-outreg2 using $results/04_bytype/bytype_log_1.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(OME0 OME1 TME1)
+outreg2 using $results/04_bytype/bytype_sep_1.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(OME0 OME1 TME1)
+
+*IPW logit type1
+cap drop osa1
+teffects ipw (TFP2017)  (FDI2016 c.($P) i.($S)  ) if FDITYPE2016==1 | FDITYPE2016==0, osample(osa1)
+outreg2 using $results/04_bytype/bytype_sep_1.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(TME1)
+
+*AIPW Logit type2
 cap drop osa1
 teffects aipw (TFP2017   i.($S) c.($P) )(FDI2016 c.($P) i.($S)  ) if FDITYPE2016==2 | FDITYPE2016==0, osample(osa1)
-outreg2 using $results/04_bytype/bytype_log_1.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(OME0 OME1 TME1)
+outreg2 using $results/04_bytype/bytype_sep_1.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(OME0 OME1 TME1)
 
+*IPW logit type 2
+cap drop osa1
+teffects ipw (TFP2017)  (FDI2016 c.($P) i.($S)  ) if FDITYPE2016==2 | FDITYPE2016==0, osample(osa1)
+outreg2 using $results/04_bytype/bytype_sep_1.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(TME1)
+
+*AIPW Logit type3
 cap drop osa1
 teffects aipw (TFP2017   i.($S) c.($P) )(FDI2016 c.($P) i.($S)  ) if FDITYPE2016==3 | FDITYPE2016==0, osample(osa1)
-outreg2 using $results/04_bytype/bytype_log_1.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(OME0 OME1 TME1)
+outreg2 using $results/04_bytype/bytype_sep_1.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(OME0 OME1 TME1)
+
+*IPW logit type3
+cap drop osa1
+teffects ipw (TFP2017)   (FDI2016 c.($P) i.($S)  ) if FDITYPE2016==3 | FDITYPE2016==0, osample(osa1)
+outreg2 using $results/04_bytype/bytype_sep_1.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(TME1)
+
+
+
 
 
 *seperate probits with dropping of variables
@@ -86,15 +112,11 @@ outreg2 using $results/04_bytype/bytype_prob_1.tex, append dec(3) drop(i.OWN i.P
 
 
 *ipws sep logits
-cap drop osa1
-teffects ipw (TFP2017)  (FDI2016 c.($P) i.($S)  ) if FDITYPE2016==1 | FDITYPE2016==0, osample(osa1)
-outreg2 using $results/4_bytype/bytype_ipw_1.tex, replace dec(3) 
-cap drop osa1
-teffects ipw (TFP2017)  (FDI2016 c.($P) i.($S)  ) if FDITYPE2016==2 | FDITYPE2016==0, osample(osa1)
-outreg2 using $results/4_bytype/bytype_ipw_1.tex, append dec(3) 
+
+
 
 cap drop osa1
 teffects ipw (TFP2017)   (FDI2016 c.($P) i.($S)  ) if FDITYPE2016==3 | FDITYPE2016==0, osample(osa1)
-outreg2 using $results/4_bytype/bytype_ipw_1.tex, append dec(3) 
+outreg2 using $results/04_bytype/bytype_ipw_1.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(TME1)
 
 
