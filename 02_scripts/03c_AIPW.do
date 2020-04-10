@@ -21,10 +21,18 @@
 *------------------------------------------------------------------------------*
 *	PART 1.1: Probit w/o TECH, using 3NN
 *------------------------------------------------------------------------------*
+cap drop osa1
+teffects ipw (TFP2017 )(FDI2016  i.OWN i.TECH i.PORT logemp2015 logwages2015 TFP2015 RD2015 ) , osample(osa1) 
+tebalance summarize
+teffects overlap
+
+gen emp15 = exp(logemp2015)
 
 cap drop osa1
-teffects aipw (logwages2017 c.($P) i.($S))(FDI2016 c.($P) i.($S)  ) , ///
-osample(osa1) 
+teffects ipw (TFP2017 )(FDI2016   i.OWN i.TECH i.PORT emp15 logwages2015 TFP2015 RD2015 ) , osample(osa1) 
+tebalance summarize
+teffects overlap
+
 
 /********************************************************************************
 					PART 2:	AIPW by type  (Georg part)
