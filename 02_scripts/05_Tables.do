@@ -1,15 +1,16 @@
 *------------------------------------------------------------------------------*
 *	PART 1:TFP  Output - Excluding TECH, including EXP
 *------------------------------------------------------------------------------*
-*------------------------------------------------------------------------------*
-*	using empl2015
-*------------------------------------------------------------------------------*
+*------------------------------------TFP---------------------------------------*
+
 //TME1: displays the coefficients for the logit treatment model; euqation from treatment effect
 //OME0 and OME1 represent the linear regression coefficients for the untreated and treated potential-outcome equations, respectively
 
 generate emp2015=exp(emp2015)
-	
-*------------------------------------TFP---------------------------------------*
+*------------------------------------------------------------------------------*
+*	Table 1: NN1, NN5, caliper(0.05)
+*------------------------------------------------------------------------------*
+
 	//NN1
 		//ATE
 	cap drop osa1 
@@ -74,7 +75,7 @@ cap drop osa1
 	//ATE
 cap drop osa1
 	teffects ipw (TFP2017) (FDI2016 i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015),  	osample(osa1) 
-	outreg2 using $results/05_Tables/Table2_TFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/05_Tables/Table1.2_TFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1) 
 	
 	//ATET
 	cap drop osa1	
@@ -82,13 +83,13 @@ teffects ipw (TFP2017) ///
 						(FDI2016 i.OWN i.PORT ///
 						logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015, logit), atet	///
 						 osample(osa1) 	
-	outreg2 using $results/05_Tables/Table2_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/05_Tables/Table1.2_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1) 
 
 //AIWP
 	cap drop osa1
 teffects aipw (TFP2017 emp2015 logwages2015 TFP2015 i.TECH i.PORT i.OW i.TECH)(FDI2016 emp2015 logwages2015 TFP2015 i.TECH i.PORT i.OWN i.TECH)
 
-	outreg2 using $results/05_Tables/Table2_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon  eqdrop(OME0 OME1 TME1)
+	outreg2 using $results/05_Tables/Table1.2_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon  eqdrop(OME0 OME1 TME1)
 
 	
 	
