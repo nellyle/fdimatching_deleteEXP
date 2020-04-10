@@ -19,7 +19,7 @@
 //	Setting globals for interaction terms
 	global F "OWN TECH PORT"	// Dummies with TECH
 	global C "logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015"
-
+cap gen TFPS17 =  (TFP2017 -  3.656046) / 2.056464
 *------------------------------------------------------------------------------*
 *	PART 1.1: No interactions
 *------------------------------------------------------------------------------*

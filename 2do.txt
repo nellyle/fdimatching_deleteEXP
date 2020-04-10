@@ -1,29 +1,32 @@
-- try out log TFP
-- solve tex-table riddle for covariate balance (emilie)
+whats included
+0. fix aipw tables (Thea)
+ -- TABLE1 NN1.(wages, TFP) NN5cal (TFP, wages)
+ -- TABLE2 IPW, AIPW (TFP)
+0. fix figures (Nelly)
+ -- FIG 1 share of FDI by techtype (hist, diff. colors)
+ -- FIG 2 NN1 overlap
+ -- FIG 3 interaction NN1 overlap (appendix)
+0. covariate balance
+ -- NN1, NN5cal,
+ -- AIPW general
+ -- AIPW, bytype  
+
+0. SECT 4 BYTYPE
+ -- TABLE3 IPW, AIPW, sep Logits,  
+
+robustness checks 
+ -- interaction terms (mention in text, show in appendix)
+ -- placebo estimation (we did wages first, mention in text)
+ -- different PS estimation with tech but without e.g. OWN 
+ -- matching without replacement?
+ -- t-test on difference in means after matching 
 
 
-SECTION 3
-----------
-- Figure 1 & Figure 2
-Overlap with and without TECH (for NN1 basic model)
---> show why TECH is crap (Table in Appendix) 
-(Nelly)
-
-- table 1 - basic model
-1. NN1 basic (without TECH for TFP and Wages)
-(Thea)
-
-- table 2
-2. NN5+caliper TFP
-3: IPW
-4. AIPW 
---> ATE, ATT
-(Thea)
-
-SECTION 4
-----------
-- table 3 (if doesnt work in one table, put in two)
--TFP by type of FDI (w/o TECH)
-   --> multinom. probit/logit
-   --> ipw and aipw
- (Georg)
+1. fix issues with tables, graphs
+2. put tables, graphs into one texfile
+3. start writing up, interpreting results
+ -- 1. literature (Yonesse)
+ -- 2. descriptive analysis (Emilie)
+ -- 3. NN1, NN5cal(main) (Nelly) 
+ -- 4. AIPW IPW (Thea)
+ -- 5. AIPW IPW bytype (Georg) 
