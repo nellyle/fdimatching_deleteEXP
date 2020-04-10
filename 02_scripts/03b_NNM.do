@@ -231,6 +231,8 @@ teffects overlap, ptlevel(1) saving($results/03b_NNM/TFP_overl_aipw.gph, replace
 //OME0 and OME1 represent the linear regression coefficients for the untreated and treated potential-outcome equations, respectively
 
 
+generate EMPL=exp(logemp2015)
+
 *------------------------------------WAGES-------------------------------------*
 	//NN1
 		// ATE
@@ -289,6 +291,8 @@ teffects overlap, ptlevel(1) saving($results/03b_NNM/TFP_overl_aipw.gph, replace
 
 	
 *------------------------------------TFP---------------------------------------*
+generate EMPL=exp(logemp2015)	
+	
 	//NN1
 		//ATE
 	cap drop osa1 
@@ -500,7 +504,9 @@ cap drop osa1
 
 	//ATE
 cap drop osa1
-	teffects ipw (TFP2017) (FDI2016 i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 i.TECH RD2015),  	osample(osa1) 
+	teffects ipw (TFP2017) (FDI2016 i.OWN i.PORT logwages2015 TFP2015 EMPL DEBTS2015 i.TECH RD2015),  	
+	osample(osa1) 
+	
 	outreg2 using $results/EXP/Table2_TFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1) 
 	
 	//ATET
