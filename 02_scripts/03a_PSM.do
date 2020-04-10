@@ -158,6 +158,11 @@
 *	PART 1.5: Cubic exports, interacting problematic variables - Possible solution?
 *------------------------------------------------------------------------------*	
 	
+	generate EXP3=EXP2015^3
+	generate emp2015=exp(logemp2015)
+	generate PORTEXP=PORT*EXP2015
+	generate TECHEXP=TECH*EXP2015
+	generate TECHPORT=TECH*PORT
 	
 	cap drop osa1 
 	cap drop p1* 
