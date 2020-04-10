@@ -30,9 +30,7 @@ generate emp2015= exp(logemp2015)
 	cap teffects psmatch (TFP2017) ///
 					 (FDI2016 i.OWN i.PORT ///
 					  logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015, logit),	///
-					  osample(osa1) generate(p1)	
-	teffects overlap,
-	
+					  osample(osa1) generate(p1)
 	outreg2 using $results/05_Tables/Table1.2_TFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1) 
 	
 		// ATET
@@ -87,7 +85,7 @@ cap drop osa1
 	//ATE
 cap drop osa1
 	teffects ipw (TFP2017) (FDI2016 i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015),  	osample(osa1) 
-	outreg2 using $results/05_Tables/Table1.2_TFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/05_Tables/Table1.2_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1) 
 	
 	//ATET
 	cap drop osa1	
