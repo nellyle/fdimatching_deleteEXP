@@ -1,0 +1,9 @@
+	(1)	(2)	(3)	(4)
+VARIABLES	logwages2017	logwages2017	__000002	__000002
+				
+r1vs0.FDI2016	0.683***	0.392***		
+	(0.039)	(0.045)		
+			.	
+Observations	11,323	11,323	11,236	11,236
+Standard errors in parentheses				
+*** p<0.01, ** p<0.05, * p<0.1				

@@ -1,0 +1,11 @@
+	(1)	(2)	(3)	(4)	(5)	(6)
+VARIABLES	ATE	POmean	ATET	POmean	ATE	POmean
+						
+r1vs0.FDI2016	0.237***		0.415***		0.293***	
+	(0.013)		(0.020)		(0.007)	
+0.FDI2016		3.483***		3.199***		3.540***
+		(0.021)		(0.035)		(0.020)
+						
+Observations	11,323	11,323	11,323	11,323	11,323	11,323
+Robust standard errors in parentheses						
+*** p<0.01, ** p<0.05, * p<0.1						
