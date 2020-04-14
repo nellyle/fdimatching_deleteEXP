@@ -25,7 +25,7 @@
 
 //	Adjust root file:	
 
-	global root	"/Users/theazollner/Documents/GitHub/fdimatching_clean"
+	global root	"/Users/theazollner/Documents/GitHub/fdimatching_deleteEXP"
 
 
 	global input	"$root/01_input"

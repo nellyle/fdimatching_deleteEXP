@@ -1,15 +1,17 @@
 \documentclass[]{article}
 \setlength{\pdfpagewidth}{8.5in} \setlength{\pdfpageheight}{11in}
 \begin{document}
-\begin{tabular}{lcccc} \hline
- & (1) & (2) & (3) & (4) \\
-VARIABLES & TFP2017 & TFP2017 & \_\_000002 & \_\_000002 \\ \hline
- &  &  &  &  \\
-r1vs0.FDI2016 & 0.360*** & 0.317*** &  &  \\
- & (0.079) & (0.043) &  &  \\
- &  &  &  &  \\
- Observations & 11,323 & 11,323 & 11,236 & 11,236 \\ \hline
-\multicolumn{5}{c}{ Standard errors in parentheses} \\
-\multicolumn{5}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
+\begin{tabular}{lcccccccc} \hline
+ & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8) \\
+VARIABLES & TFP2017 & TFP2017 & TFP2017 & TFP2017 & ATE & POmean & ATET & POmean \\ \hline
+ &  &  &  &  &  &  &  &  \\
+r1vs0.FDI2016 & 0.257*** & 0.302*** & 0.246*** & 0.273*** & 0.245*** &  & 0.367*** &  \\
+ & (0.038) & (0.040) & (0.028) & (0.022) & (0.013) &  & (0.013) &  \\
+0.FDI2016 &  &  &  &  &  & 3.510*** &  & 3.247*** \\
+ &  &  &  &  &  & (0.020) &  & (0.033) \\
+ &  &  &  &  &  &  &  &  \\
+ Observations & 11,323 & 11,323 & 11,321 & 11,321 & 11,323 & 11,323 & 11,323 & 11,323 \\ \hline
+\multicolumn{9}{c}{ Standard errors in parentheses} \\
+\multicolumn{9}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
 \end{tabular}
 \end{document}
