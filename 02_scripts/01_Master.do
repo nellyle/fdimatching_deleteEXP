@@ -28,7 +28,7 @@
 
 	global input	"$root/01_input"
 	global scripts	"$root/02_scripts"
-	global log	"$root/03_log"
+	global log		"$root/03_log"
 	global results	"$root/04_results"
 	
 	use "$input/FDI_project"
@@ -48,6 +48,11 @@
 	label var RD2015 "R&D dummy"
 	label var logwages2017 "Log wages"
 	label var TFP2017 "TFP"
+	
+	gen emp2015 = exp(logemp2015)
+	label var emp2015 "Employment"
+	
+	save $input/FDI_project_clean
 
 ********************************************************************************
 *			PART 2: Descriptive Analysis
