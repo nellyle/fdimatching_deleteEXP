@@ -18,10 +18,18 @@
 	describe
 
 //	Covariance matrix
-	corr	
+	corr	FDI2016 ///
+			OWN TECH PORT ///
+			logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 
+			
 /*	--> fdi is pos correlated to PORT, negatively to TECH
 	--> pos. to logemp2015, EXP2015, logwages2017, logemp2017 and EXP2017	*/
 	
+//	Summary Statistics	
+	outreg2 using "$results/02_Descriptive_Analysis_testfile.tex", sum(detail) replace ///
+	keep(logwages2015 TFP2015 DEBTS2015 EXP2015 RD2015 logwages2017 emp2015) ///
+	label eqkeep(N mean p50 sd min max)
+
 
 ********************************************************************************
 *					PART 2: Balance Tests
@@ -30,6 +38,8 @@
 *------------------------------------------------------------------------------*
 *	PART 2.1: Overlap of pre-treatement variables
 *------------------------------------------------------------------------------*
+	
+			
 //	Density plots comparing tratment and control groups for selected varaibles
 		
 //	OWN 
