@@ -49,8 +49,11 @@
 	label var logwages2017 "Log wages"
 	label var TFP2017 "TFP"
 	
-	gen emp2015 = exp(logemp2015)
+	gen emp2015 = exp(logemp2015), after(logemp2015)
 	label var emp2015 "Employment"
+	
+	gen emp2017 = exp(logemp2017), after(logemp2017)
+	label var emp2017 "Employment 2017"
 	
 	save $input/FDI_project_clean
 

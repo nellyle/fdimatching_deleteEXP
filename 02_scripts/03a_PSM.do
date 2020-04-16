@@ -192,7 +192,7 @@ cap gen TFPS17 =  (TFP2017 -  3.656046) / 2.056464
 					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit),	///
 					  osample(osa1) generate(p1)
 
-	 outreg2 using $results\test_1.tex, replace dec(3) addnote("This is a note")   
+	 outreg2 using $results/test_1.tex, replace dec(3) addnote("This is a note")   
 					  
 	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_prob_noTECH.gph, replace)
 	graph export $results/03a_PSM/overl_prob_noTECH.pdf, as(pdf) replace
@@ -216,7 +216,7 @@ cap gen TFPS17 =  (TFP2017 -  3.656046) / 2.056464
 					 (FDI2016 i.($D)##i.($D) $C, probit), ///
 					  osample(osa1) generate(p1)
 
-	outreg2 using $results\test_1.tex, append dec(3) 	
+	outreg2 using $results/test_1.tex, append dec(3) 	
 		 
 	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_prob_noTECH#d.gph, replace)
 	graph export $results/03a_PSM/overl_prob_noTECH#d.pdf, as(pdf) replace
