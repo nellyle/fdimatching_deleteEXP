@@ -9,7 +9,7 @@
 					Effect of FDI on TFP
 		
 		OUTLINE:	PART 1:	Complete Model
-					PART 2: Improved Model (w/o TECH)
+					PART 2: Improved Model (w/o EXP)
 														
 	
 ********************************************************************************
@@ -17,7 +17,7 @@
 *******************************************************************************/
 
 //	Setting globals for interaction terms
-	global F "OWN TECH PORT"	// Dummies with TECH
+	global F "OWN TECH PORT"
 	global C "logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015"
 cap gen TFPS17 =  (TFP2017 -  3.656046) / 2.056464
 *------------------------------------------------------------------------------*
@@ -155,11 +155,12 @@ cap gen TFPS17 =  (TFP2017 -  3.656046) / 2.056464
 	
 	
 ********************************************************************************
-*					PART 2:	Improved Model (w/o TECH)
+*					PART 2:	Improved Model (w/o EXP)
 *******************************************************************************/
 
 //	Setting global for interaction terms
-	global D "OWN PORT"			// Dummies without TECH
+	global I "logwages2015 TFP2015 logemp2015 DEBTS2015 RD2015"		
+	// continuous variables w/o EXP
 
 *------------------------------------------------------------------------------*
 *	PART 2.1: No interactions
@@ -171,12 +172,12 @@ cap gen TFPS17 =  (TFP2017 -  3.656046) / 2.056464
 	cap drop osa1 
 	cap drop p1 
 	teffects psmatch (TFP2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015),	///
+					 (FDI2016 i.OWN i.TECH PORT ///
+					  logwages2015 TFP2015 logemp2015 DEBTS2015 /*EXP2015*/ RD2015),	///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_log_noTECH.gph, replace)
-	graph export $results/03a_PSM/overl_log_noTECH.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_log_noEXP.gph, replace)
+	graph export $results/03a_PSM/overl_log_noEXP.pdf, as(pdf) replace
 	// Much better overlap
 	
 	tebalance summarize
@@ -188,14 +189,14 @@ cap gen TFPS17 =  (TFP2017 -  3.656046) / 2.056464
 	cap drop osa1 
 	cap drop p1 
 	teffects psmatch (TFP2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit),	///
+					 (FDI2016 i.OWN i.TECH PORT ///
+					  logwages2015 TFP2015 logemp2015 DEBTS2015 /*EXP2015*/ RD2015, probit),	///
 					  osample(osa1) generate(p1)
 
 	 outreg2 using $results/test_1.tex, replace dec(3) addnote("This is a note")   
 					  
-	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_prob_noTECH.gph, replace)
-	graph export $results/03a_PSM/overl_prob_noTECH.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_prob_noEXP.gph, replace)
+	graph export $results/03a_PSM/overl_prob_noEXP.pdf, as(pdf) replace
 	// Much better overlap
 	
 	tebalance summarize
@@ -213,13 +214,13 @@ cap gen TFPS17 =  (TFP2017 -  3.656046) / 2.056464
 	cap drop osa1 
 	cap drop p1 
 	teffects psmatch (TFP2017) ///
-					 (FDI2016 i.($D)##i.($D) $C, probit), ///
+					 (FDI2016 i.($F)##i.($F) $I, probit), ///
 					  osample(osa1) generate(p1)
 
 	outreg2 using $results/test_1.tex, append dec(3) 	
 		 
-	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_prob_noTECH#d.gph, replace)
-	graph export $results/03a_PSM/overl_prob_noTECH#d.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_prob_noEXP#d.gph, replace)
+	graph export $results/03a_PSM/overl_prob_noEXP#d.pdf, as(pdf) replace
 	
 	tebalance summarize
 	// SD better for some, worse for others but all still below 10%. VR fine.
@@ -231,11 +232,11 @@ cap gen TFPS17 =  (TFP2017 -  3.656046) / 2.056464
 	cap drop osa1 
 	cap drop p1 
 	teffects psmatch (TFP2017) ///
-					 (FDI2016 i.($D) c.($C)##c.($C), probit), ///
+					 (FDI2016 i.($F) c.($I)##c.($I), probit), ///
 					  osample(osa1) generate(p1)
 					  
-	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_prob_noTECH#c.gph, replace)
-	graph export $results/03a_PSM/overl_prob_noTECH#c.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_prob_noEXP#c.gph, replace)
+	graph export $results/03a_PSM/overl_prob_noEXP#c.pdf, as(pdf) replace
 	
 	tebalance summarize
 	// SD now worse (one above 10%). VR fine.
@@ -247,19 +248,19 @@ cap gen TFPS17 =  (TFP2017 -  3.656046) / 2.056464
 	cap drop osa1 
 	cap drop p1 
 	cap teffects psmatch (TFP2017) ///
-					 (FDI2016 i.($D)##c.($C) i.($D)#i.($D) c.($C)#c.($C), probit), ///
+					 (FDI2016 i.($F)##c.($I) i.($F)#i.($F) c.($I)#c.($I), probit), ///
 					  osample(osa1) generate(p1)
-					  // Treatment overlap assumption violated by 1 obs
+					  // Treatment overlap assumption violated by 61 obs
 	
 	// Reestimate				  
 	teffects psmatch (TFP2017) ///
-					 (FDI2016 i.($D)##c.($C) i.($D)#i.($D) c.($C)#c.($C), probit) ///
+					 (FDI2016 i.($F)##c.($I) i.($F)#i.($F) c.($I)#c.($I), probit) ///
 					  if osa1 == 0
 	
 	tebalance summarize
 	// SD above 10% for some interactions. VR fine.
 					  
-	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_prob_noTECH#all.gph, replace)
-	graph export $results/03a_PSM/overl_prob_noTECH#all.pdf, as(pdf) replace
+	teffects overlap, ptlevel(1) saving($results/03a_PSM/overl_prob_noEXP#all.gph, replace)
+	graph export $results/03a_PSM/overl_prob_noEXP#all.pdf, as(pdf) replace
 	
 	
