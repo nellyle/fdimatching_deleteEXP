@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.11.23)  14 APR 2020 20:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.11.23)  17 APR 2020 09:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -41,7 +41,7 @@ LaTeX Font Info:    ... okay on input line 3.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 5.
 
-Overfull \hbox (109.19919pt too wide) in paragraph at lines 5--18
+Overfull \hbox (186.36673pt too wide) in paragraph at lines 5--18
 [][] 
  []
 
@@ -52,7 +52,7 @@ Overfull \hbox (109.19919pt too wide) in paragraph at lines 5--18
 Here is how much of TeX's memory you used:
  202 strings out of 492649
  2227 string characters out of 6129621
- 62838 words of memory out of 5000000
+ 63838 words of memory out of 5000000
  4171 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -61,7 +61,7 @@ Here is how much of TeX's memory you used:
 sfonts/cm/cmmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmr5.pfb>
-Output written on Table1.2_TFP.pdf (1 page, 30529 bytes).
+Output written on Table1.2_TFP.pdf (1 page, 30732 bytes).
 PDF statistics:
  20 PDF objects out of 1000 (max. 8388607)
  13 compressed objects within 1 object stream
