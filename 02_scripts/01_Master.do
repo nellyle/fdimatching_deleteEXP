@@ -48,12 +48,18 @@
 	label var RD2015 "R&D dummy"
 	label var logwages2017 "Log wages"
 	label var TFP2017 "TFP"
-	
-	gen emp2015 = exp(logemp2015), after(logemp2015)
+
+//	Unlogging employment before treatment	
+	gen emp15 = exp(logemp2015), after(logemp2015)
 	label var emp2015 "Employment"
-	
-	gen emp2017 = exp(logemp2017), after(logemp2017)
+
+//	Unlogging employment after treatment	
+	gen emp17 = exp(logemp2017), after(logemp2017)
 	label var emp2017 "Employment 2017"
+	
+//	Standardizing outcome variable TFP2017	
+	gen TFPS17 = (TFP2017-3.656046)/2.056464, after TFP2017
+	label var TFPS17 "Standarized TFP"
 	
 	save $input/FDI_project_clean
 
