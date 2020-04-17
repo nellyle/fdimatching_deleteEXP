@@ -169,6 +169,20 @@ graph export $results/02_Descriptive_Analysis/hist_EXPbyFDI.pdf, as(pdf) replace
 
 // No FDI very right-skewed whereas FDI seems to be more equally distributed for different Export Intensities
 
+*============*
+* HISTOGRAM 2
+*============*
+
+//Option 1 - Overlapping bars
+twoway hist EXP2015 if FDI2016==0, color(navy%30) barw (0.2) || hist EXP2015 if FDI2016==1, ///
+	legend(order(1 "control" 2 "treated")) xtitle(Export Intensity) color(maroon%30) barw(0.2) saving($results/02_Descriptive_Analysis/hist2_EXPbyFDI.gph, replace)
+graph export $results/02_Descriptive_Analysis/hist2_EXPbyFDI.pdf, as(pdf) replace
+
+// Option 2 - Bars next to each other
+byhist EXP2015, by(FDI2016) tw(xtitle("Export Intensity") graphregion(fcolor(white)) legend(label(1 "No FDI") label(2 "FDI"))) width(0.4) 
+// don't know how to save yet!
+
+
 *=========*
 * KDENSITY
 *=========*

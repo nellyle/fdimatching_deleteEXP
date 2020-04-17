@@ -11,6 +11,7 @@
 		OUTLINE:	PART 1:	Complete Model
 					PART 2: Improved Model (w/o TECH)
 					PART 3: Figure Overlap w/ and w/o TECH
+					PART 4: Figure Overlap w/ and w/o EXP2015
 														
 	
 ********************************************************************************
@@ -45,8 +46,84 @@
 	
 	tebalance summarize
 	// SD catastrophy. VR not good either.
-			  
-					  
+
+	
+*TESTTESTTEST*	
+generate EXP3=EXP2015^3
+generate EXP2=EXP2015^2
+generate emp2015=exp(logemp2015)
+generate wagesemp=logwages2015*emp2015
+generate tfpemp=TFP2015*emp2015
+generate logtfpemp=TFP2015*logemp2015
+	global F "OWN TECH"	
+	global C "logwages2015 TFP2015 emp2015 DEBTS2015 EXP3 RD2015"
+
+
+*	ATE:
+*	----
+*------------------------------------------------------------------------------*
+	cap drop osa1 
+	cap drop p1 
+	teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN i.TECH ///
+					  logwages2015 TFP2015 emp2015 EXP3 DEBTS2015 RD2015) if TECH!=4,	///
+					  osample(osa1) generate(p1)
+	teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN i.TECH ///
+					  logwages2015 TFP2015 emp2015 EXP3 DEBTS2015 RD2015) if TECH!=4 & osa1==0,	///
+					  generate(p1)				  		
+
+	teffects overlap, ptlevel(1) 
+	
+	tebalance summarize
+	// good balance! 	
+*------------------------------------------------------------------------------*	
+	
+	generate RDTECH=TECH*RD2015
+	generate TFPEXP=TFP2015*EXP2015
+	cap drop osa1 
+	cap drop p1 
+	teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN i.TECH ///
+					  logwages2015 TFP2015 emp2015 EXP3 DEBTS2015 RD2015 RDTECH),	///
+					  nneighbor(5) caliper(.05) osample(osa1) generate(p1)
+	teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN i.TECH ///
+					  logwages2015 TFP2015 emp2015 EXP3 DEBTS2015 RD2015 RDTECH) if osa1==0,	///
+					 nneighbor(5) caliper(.05) generate(p1)				  		
+
+	teffects overlap, ptlevel(1) 
+	
+	tebalance summarize
+
+	
+	
+	cap drop osa1 
+	cap drop p1 
+	cap teffects ipw (TFP2017) ///
+					 (FDI2016 i.OWN i.TECH ///
+					  logwages2015 TFP2015 emp2015 EXP3 DEBTS2015 RD2015 RDTECH),	///
+					  osample(osa1)
+	teffects ipw (TFP2017) ///
+					 (FDI2016 i.OWN i.TECH ///
+					  logwages2015 TFP2015 emp2015 EXP3 DEBTS2015 RD2015 RDTECH) if osa1==0				  		
+
+	teffects overlap, ptlevel(1) 
+	
+	tebalance summarize
+
+	
+	
+	
+	cap drop osa1 
+	cap drop p1* 
+	cap teffects psmatch (TFP2017) ///
+					 (FDI2016 i.($F)##c.($C)),	///
+					  osample(osa1) generate(p1)
+	teffects psmatch (TFP2017) ///
+					 (FDI2016 i.($F)##c.($C)) if osa1==0,	///
+					 generate(p1)
+	
 *========*
 * Probit
 *========*
@@ -383,3 +460,58 @@ gr combine $results/03a_PSM/overl_prob_comp1.gph $results/03a_PSM/overl_prob_noT
 	
 gr combine $results/03a_PSM/overl_prob_noTECH.gph $results/03a_PSM/overl_prob_noTECH#all.gph, xsize(9) ysize(4.5) /*title("FIGURE 1 - Propensity Score Overlap with interactions")*/ graphregion(fcolor(white)) saving($results/03a_PSM/overl_figure1_TECHvsnoTECH_interactions.gph, replace)
 	graph export $results/03a_PSM/overl_figure1_TECHvsnoTECH_interactions.pdf, as(pdf) replace
+	
+	
+
+	
+	
+/*******************************************************************************
+					PART 4: Figure Overlap w/ and w/o EXP2015
+*******************************************************************************/
+
+*------------------------------------------------------------------------------*
+*	PART 3.1: Full model vs w/o EXP2015
+*------------------------------------------------------------------------------*
+
+// Using graphs of the two models above (NN1, logit)
+
+cap generate emp2015=exp(logemp2015)
+
+*========*
+* W/ TECH
+*========*
+	
+	cap drop osa1 
+	cap drop p1 	
+	cap teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN i.TECH PORT ///
+					  logwages2015 TFP2015 emp2015 DEBTS2015 EXP2015 RD2015),	///
+					  osample(osa1) generate(p1)		   
+	teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN i.TECH PORT ///
+					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015)	///
+					  if osa1 == 0				  		  
+	teffects overlap, ptlevel(1) xtitle("Propensity Score") ytitle("Density") title("Including Exports") legend(label(1 "No FDI") label(2 "FDI")) graphregion(fcolor(white)) graphregion(lcolor(white)) saving($results/03a_PSM/overl_prob_comp1.gph, replace)
+	graph export $results/03a_PSM/overl_prob_comp1.pdf, as(pdf) replace
+
+*========*
+* W/O TECH
+*========*
+	
+	cap drop osa1 
+	cap drop p1 
+	teffects psmatch (TFP2017) ///
+					 (FDI2016 i.OWN i.TECH PORT ///
+					  logwages2015 TFP2015 emp2015 DEBTS2015 /*EXP2015*/ RD2015),	///
+					  osample(osa1) generate(p1)  
+	teffects overlap, ptlevel(1) xtitle("Propensity Score") ytitle("Density") title("Excluding Exports") legend(label(1 "No FDI") label(2 "FDI")) graphregion(fcolor(white)) graphregion(lcolor(white)) saving($results/03a_PSM/overl_prob_noEXP.gph, replace)
+	graph export $results/03a_PSM/overl_prob_noEXP.pdf, as(pdf) replace
+
+*========*
+* COMBINE
+*========*
+	
+	
+gr combine $results/03a_PSM/overl_prob_comp1.gph $results/03a_PSM/overl_prob_noEXP.gph, xsize(9) ysize(4.5) /*title("FIGURE 1 - Propensity Score Overlap")*/ graphregion(fcolor(white)) saving($results/03a_PSM/overl_figure1_EXPvsnoEXP.gph, replace)
+	graph export $results/03a_PSM/overl_figure1_EXPvsnoEXP.pdf, as(pdf) replace
+
