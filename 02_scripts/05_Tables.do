@@ -11,7 +11,7 @@
 					PART 2: Wages
 														
 *------------------------------------------------------------------------------*
-*	PART 1:TFP  Output - Excluding TECH, including EXP
+*	PART 1:TFP  Output - Including TECH, excluding EXP
 *------------------------------------------------------------------------------*
 *------------------------------------TFP---------------------------------------*
 
@@ -31,16 +31,16 @@ generate emp2015= exp(logemp2015)
 		//ATE
 	cap drop osa1 
 	cap drop p1* 
-	cap teffects psmatch (TFP2017) ///
+	cap teffects psmatch (TFPS2017) ///
 					 (FDI2016 i.OWN i.PORT ///
 					  logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015, logit),	///
 					  osample(osa1) generate(p1)
-	outreg2 using $results/05_Tables/Table1.2_TFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/05_Tables/Table1.2_TFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1)
 	
 		// ATET
 	cap drop osa1 
 	cap drop p1* 
-	cap teffects psmatch (TFP2017) ///
+	cap teffects psmatch (TFPS2017) ///
 						(FDI2016 i.OWN i.PORT ///
 						logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015, logit), atet	///
 						osample(osa1) generate(p1)
@@ -51,14 +51,14 @@ generate emp2015= exp(logemp2015)
 		// ATE	
 	cap drop osa1 
 	cap drop p1* 
-	cap teffects psmatch (TFP2017) ///
+	cap teffects psmatch (TFPS2017) ///
 						(FDI2016 i.OWN i.PORT ///
 						logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015, logit),	///
 						nneighbor(5) caliper(.05) osample(osa1) generate(p1)
 						// 5 observations violate caliper
 	 
 	// Reestimate
-	cap teffects psmatch (TFP2017) ///
+	cap teffects psmatch (TFPS2017) ///
 					 (FDI2016 i.OWN i.PORT ///
 					  logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015, logit) if osa1==0,	///
 					  nneighbor(5) caliper(.05)  generate(p1) 
@@ -68,14 +68,14 @@ generate emp2015= exp(logemp2015)
 		// ATET
 cap drop osa1 
 	cap drop p1* 
-	cap teffects psmatch (TFP2017) ///
+	cap teffects psmatch (TFPS2017) ///
 						(FDI2016 i.OWN i.PORT ///
 						logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015, logit), atet	///
 						nneighbor(5) caliper(.05) osample(osa1) generate(p1)
 						// 6  observations have fewer than 5 propensity-score matches within caliper .05
 	 
 	// Reestimate
-	cap teffects psmatch (TFP2017) ///
+	cap teffects psmatch (TFPS2017) ///
 					 (FDI2016 i.OWN i.PORT ///
 					  logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015, logit) if osa1==0, atet	///
 					  nneighbor(5) caliper(.05)  generate(p1)
@@ -88,12 +88,12 @@ cap drop osa1
 
 	//ATE
 cap drop osa1
-	teffects ipw (TFP2017) (FDI2016 i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015),  	osample(osa1) 
+	teffects ipw (TFPS2017) (FDI2016 i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015),  	osample(osa1) 
 	outreg2 using $results/05_Tables/Table1.2_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1) 
 	
 	//ATET
 	cap drop osa1	
-teffects ipw (TFP2017) ///
+teffects ipw (TFPS2017) ///
 						(FDI2016 i.OWN i.PORT ///
 						logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015, logit), atet	///
 						 osample(osa1) 	
