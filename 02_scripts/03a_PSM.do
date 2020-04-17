@@ -48,6 +48,10 @@
 	// SD catastrophy. VR not good either.
 
 	
+global F "OWN TECH"	
+global C "logwages2015 TFP2015 emp2015 DEBTS2015 RD2015"	
+	
+	
 *TESTTESTTEST*	
 generate EXP3=EXP2015^3
 generate EXP2=EXP2015^2
@@ -81,6 +85,7 @@ generate logtfpemp=TFP2015*logemp2015
 	
 	generate RDTECH=TECH*RD2015
 	generate TFPEXP=TFP2015*EXP2015
+	generate EXP3=EXP2015^3
 	cap drop osa1 
 	cap drop p1 
 	teffects psmatch (TFP2017) ///
