@@ -7,12 +7,13 @@
 		
 		PURPOSE:	Tables to include in .tex file
 		
-		OUTLINE:	PART 1:	TFP
-					PART 2: Wages
-														
-*------------------------------------------------------------------------------*
-*	PART 1:TFP  Output - Including TECH, excluding EXP
-*------------------------------------------------------------------------------*
+		OUTLINE:	TABLE 1: MAIN RESULTS
+					TABLE 2: ROBUSTNESS
+					TABLE 3: 
+		
+********************************************************************************
+			TABLE 2: ROBUSTNESS
+*******************************************************************************/
 *------------------------------------TFP---------------------------------------*
 
 //TME1: displays the coefficients for the logit treatment model; euqation from treatment effect
