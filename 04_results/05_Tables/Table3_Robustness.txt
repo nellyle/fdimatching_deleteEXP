@@ -1,0 +1,9 @@
+	(1)	(2)	(3)	(4)
+VARIABLES	TFPS17	TFPS17	TFPS17	TFPS17
+				
+r1vs0.FDI2016	0.176***	0.127***	0.125***	0.127***
+	(0.018)	(0.015)	(0.019)	(0.017)
+				
+Observations	11,323	11,321	11,323	11,323
+Standard errors in parentheses				
+*** p<0.01, ** p<0.05, * p<0.1				
