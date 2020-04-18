@@ -70,7 +70,7 @@ global P "OWN TECH PORT"
 
 	cap drop osa1 
 	cap drop p1* 
-	teffects psmatch (TFPS17) ///
+	cap teffects psmatch (TFPS17) ///
 					 (FDI2016 i.($P) c.($C), logit),	///
 					  osample(osa1) generate(p1)
 	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)
