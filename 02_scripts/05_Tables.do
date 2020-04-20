@@ -36,8 +36,7 @@
 	cap drop osa1 
 	cap drop p1* 
 	 cap teffects psmatch (TFPS17) ///
-					 (FDI2016 i.OWN i.PORT ///
-					  logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015, logit),	///
+					 (FDI2016 i.($F) c.($C), logit),	///
 					  osample(osa1) generate(p1)
 	outreg2 using $results/05_Tables/Table1.2_TFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1)
 	
