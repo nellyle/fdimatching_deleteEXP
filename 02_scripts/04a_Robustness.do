@@ -1,250 +1,157 @@
 /*******************************************************************************
-						ROBUSTNESS CHECKS DO-FILE
+								Tables DO-FILE
 ********************************************************************************
 													   Applied Microeconometrics
 															   Empirical Project
 																	 Do-File 04a
 		
-	PURPOSE:	Perform robustness checks
+		PURPOSE:	Robustness checks of NN1 model
 		
-	OUTLINE:	PART 1:	Treatment effects for different TECH-levels (TFP)
-				PART 2:	Treatment effects for different TECH-levels (wages)
-														
-	
-********************************************************************************
-			PART 1:	Treatment effects for different TECH-levels (TFP)
+		OUTLINE:	TABLE 3: ROBUSTNESS
+					
+/********************************************************************************
+			TABLE 3: ROBUSTNESS
 *******************************************************************************/
-/*		
-		- All models use probit and nneigghbor (3) and no interactions
-		- with nn5 and caliper .05 would need to drop too many variables
-		--> in general not useful to divide into TECH subsamples			*/
-
 *------------------------------------------------------------------------------*
-*	PART 1.1: Probit w/o TECH, using 3NN
-*------------------------------------------------------------------------------*
+*	(1) NN1 interaction
+*	(2) NN1 (excluding emp outlier>8.000.000)
+*	(3) NN1 (including port)
+*	(4) ATT for NN1
+*	(5) - (6) NN1 by TECH
+*------------------------------------------------------------------------------*//
 
-cap gen TFPS17 =  (TFP2017 -  3.656046) / 2.056464
+
+//	Setting globals and generating variables
+	
+	cap generate TFPS17=  (TFP2017-3.656046)/2.056464
+	cap generate emp2015= exp(logemp2015)
+	
+	global F "OWN TECH RD2015"
+	global C "logwages2015 TFP2015 emp2015 DEBTS2015"
 
 
-** TECH==1 (low)	
-*----------
+*====================*
+* (1) NN1 interaction
+*====================*
+
 	cap drop osa1 
 	cap drop p1* 
-	teffects psmatch (TFP2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit)if TECH==1,	///
-					  nneighbor(3) osample(osa1) generate(p1)
+	cap teffects psmatch (TFPS17) ///
+						(FDI2016 i.($F)##c.($C), logit),	///
+						osample(osa1) generate(p1)
+
+	outreg2 using $results/05_Tables/Table3_Robustness.tex, replace dec(3) drop(i.OWN i.TECH logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1) 
+
+
+*====================*
+* (2) NN1 emp2015<8M
+*====================*
+
+	cap drop osa1 
+	cap drop p1* 
+	cap teffects psmatch (TFPS17) ///
+						(FDI2016 i.($F) c.($C), logit) if emp2015<4000000,		///
+						osample(osa1) generate(p1)
+
+	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1) 
+
+
+*====================*
+* (3) NN1 (incl. port)
+*====================*
+
+global P "OWN TECH RD2015 PORT"
+
+	cap drop osa1 
+	cap drop p1* 
+	cap teffects psmatch (TFPS17) ///
+					 (FDI2016 i.($P) c.($C), logit),	///
+					  osample(osa1) generate(p1)
+	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)
+
+
+*====================*
+* (4) ATT for NN1
+*====================*
+
+	cap drop osa1 
+	cap drop p1* 
+	cap teffects psmatch (TFPS17) ///
+						(FDI2016 i.($F) c.($C), logit), atet	///
+						osample(osa1) generate(p1)
+
+	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1) 
+
+*------------------------------------------------------------------------------*
+*	ATE OF FDI ON TFP BY TECH INTENSITY
+*------------------------------------------------------------------------------*	
+
+*====================*
+* (5) NN1 TECH=1
+*====================*
+
+	cap drop osa1 
+	cap drop p1 
+	teffects psmatch (TFPS17) ///
+					 (FDI2016  i.($F) c.($C), logit) if TECH==1,	///
+					  osample(osa1) generate(p1)
+	tebalance summarize				  
+	// very good SD and variance ratio
+	// ATE =  .1600066 
+	//4194 observations
+
+	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)
 		
-	teffects overlap, ptlevel(1) saving($results/04_Robustness/TFP_3NN_TECH1.gph, replace)
-	graph export $results/04_Robustness/TFP_3NN_TECH1.pdf, as(pdf) replace
-	// bad overlap
+*====================*
+* (6) NN1 TECH=2
+*====================*
 	
-	tebalance summarize
-	// SD very bad
-
-** TECH==2 (medium-low)
-*----------
 	cap drop osa1 
-	cap drop p1* 
-	cap teffects psmatch (TFP2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit)if TECH==2,	///
-					  nneighbor(3) osample(osa1) generate(p1)
-	teffects psmatch (TFP2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit)if TECH==2 & osa1==0,	///
-					  nneighbor(3) generate(p1)
-		
-	
-	teffects overlap, ptlevel(1) saving($results/04_Robustness/TFP_3NN_TECH2.gph, replace)
-	graph export $results/04_Robustness/TFP_3NN_TECH2.pdf, as(pdf) replace
-	// bad overlap
-	
+	cap drop p1 
+	teffects psmatch (TFPS17) ///
+					 (FDI2016  i.($F) c.($C), logit) if TECH==2,	///
+					  osample(osa1) generate(p1)
 	tebalance summarize
-	// SD very bad
+	// very good SD and variance ratio
+	// ATE = .0864057 
+	// 1685 observations
 
+	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)	
 	
-** TECH==3 (medium-high)
-*----------	
+*====================*
+* (7) NN1 TECH=3
+*====================*
+	
 	cap drop osa1 
-	cap drop p1* 
-	cap teffects psmatch (TFP2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit)if TECH==3,	///
-					  nneighbor(3) osample(osa1) generate(p1)
-	teffects psmatch (TFP2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit)if TECH==3 & osa1==0,	///
-					  nneighbor(3) generate(p1)
-		
-	teffects overlap, ptlevel(1) saving($results/04_Robustness/TFP_3NN_TECH3.gph, replace)
-	graph export $results/04_Robustness/TFP_3NN_TECH3.pdf, as(pdf) replace
-	// bad overlap
-	
+	cap drop p1 
+	teffects psmatch (TFPS17) ///
+					 (FDI2016  i.($F) c.($C), logit) if TECH==3,	///
+					  osample(osa1) generate(p1)
 	tebalance summarize
-	// SD very bad
+	// very good SD, variance ratios good except emp2015 (0.5) 
+	// ATE = .1721028  
+	// 3539 observations
 
+	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)
 	
-** TECH==4 (high)
-*----------
+*====================*
+* (8) NN1 TECH=4
+*====================*
+	
 	cap drop osa1 
-	cap drop p1* 
-	cap teffects psmatch (TFP2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit)if TECH==4,	///
-					  nneighbor(3) osample(osa1) generate(p1)
-	teffects psmatch (TFP2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit)if TECH==4 & osa1==0,	///
-					  nneighbor(3) generate(p1)
-		
-	teffects overlap, ptlevel(1) saving($results/04_Robustness/TFP_3NN_TECH4.gph, replace)
-	graph export $results/04_Robustness/TFP_3NN_TECH4.pdf, as(pdf) replace
-	// bad overlap
-	
-	tebalance summarize
-	// SD very bad
-	
-	
-*------------------------------------------------------------------------------*
-*	PART 1.2: Probit w/o TECH including interactions, using 3NN
-*------------------------------------------------------------------------------*
-	
-** TECH==1	
-*----------
-	cap drop osa1 
-	cap drop p1* 
-	global D "OWN PORT" /*TECH*/
-	global C "logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015"
-	cap teffects psmatch (TFP2017) ///
-					 (FDI2016 i.($D)##c.($C), probit) if TECH==1,	///
-					  nneighbor(3) osample(osa1) generate(p1)
-	teffects psmatch (TFP2017) ///
-					 (FDI2016 i.($D)##c.($C), probit) if TECH==1 & osa1==0,	///
-					  nneighbor(3) generate(p1)
+	cap drop p1 
+	teffects psmatch (TFPS17) ///
+					 (FDI2016  i.($F) c.($C), logit) if TECH==4,	///
+					  osample(osa1) generate(p1)
+	tebalance summarize				  				  
+	// very good variance ratio, SD good except emp2015 (0.15)
+	// ATE = .1802721
+	// 1905 observations
 
-					  
-	teffects overlap, ptlevel(1) saving($results/04_Robustness/TFP_3NN#dc_TECH1.gph, replace)
-	graph export $results/04_Robustness/TFP_3NN#dc_TECH1.pdf, as(pdf) replace
-	// bad overlap
+	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)	
 	
-	tebalance summarize
-	// SD very bad
+* Calculating ATE weighted by each sample size: 
+display (0.1600066*4194+0.0864057*1685+0.1721028*3539+0.1802721*1905)/11232 /*= 0.15750992*/
+//find bigger effect if require observations to be matched with observations of same technology intensity only*/
 
-	// no point in running interaction model with other subsamples 
-
-	
-	
-********************************************************************************
-*			PART 2:	Treatment effects for different TECH-levels (wages)
-*******************************************************************************/
-
-*------------------------------------------------------------------------------*
-*	PART 2.1: Probit w/o TECH, using 3NN
-*------------------------------------------------------------------------------*
-
-** TECH==1	
-*----------
-	cap drop osa1 
-	cap drop p1* 
-	teffects psmatch (logwages2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit) if TECH==1,	///
-					  nneighbor(3) osample(osa1) generate(p1)
-
-	teffects overlap, ptlevel(1) saving($results/04_Robustness/WAGES_3NN_TECH1.gph, replace)
-	graph export $results/04_Robustness/WAGES_3NN_TECH1.pdf, as(pdf) replace
-	// bad overlap
-	
-	tebalance summarize
-	// SD very bad
-
-** TECH==2
-*----------	
-	cap drop osa1 
-	cap drop p1* 
-	cap teffects psmatch (logwages2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit) if TECH==2,	///
-					  nneighbor(3) osample(osa1) generate(p1)
-	teffects psmatch (logwages2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit) if TECH==2 & osa1==0,	///
-					  nneighbor(3) generate(p1)
-					  
-	teffects overlap, ptlevel(1) saving($results/04_Robustness/WAGES_3NN_TECH2.gph, replace)
-	graph export $results/04_Robustness/WAGES_3NN_TECH2.pdf, as(pdf) replace
-	// bad overlap
-	
-	tebalance summarize
-	// SD very bad
-	
-** TECH==3	
-*----------
-	cap drop osa1 
-	cap drop p1* 
-	cap teffects psmatch (logwages2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit) if TECH==3,	///
-					  nneighbor(3) osample(osa1) generate(p1)
-	teffects psmatch (logwages2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit) if TECH==3 & osa1==0,	///
-					  nneighbor(3) generate(p1)
-
-	
-	teffects overlap, ptlevel(1) saving($results/04_Robustness/WAGES_3NN_TECH3.gph, replace)
-	graph export $results/04_Robustness/WAGES_3NN_TECH3.pdf, as(pdf) replace
-	// bad overlap
-	
-	tebalance summarize
-	// SD very bad
-
-** TECH==4
-*----------
- 	cap drop osa1 
-	cap drop p1* 
-	cap teffects psmatch (logwages2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit) if TECH==4,	///
-					  nneighbor(3) osample(osa1) generate(p1)
-	teffects psmatch (logwages2017) ///
-					 (FDI2016 i.OWN /*i.TECH*/ PORT ///
-					  logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, probit) if TECH==4 & osa1==0,	///
-					  nneighbor(3) generate(p1)
-
-	
-	teffects overlap, ptlevel(1) saving($results/04_Robustness/WAGES_3NN_TECH4.gph, replace)
-	graph export $results/04_Robustness/WAGES_3NN_TECH4.pdf, as(pdf) replace
-	// bad overlap
-	
-	tebalance summarize
-	// SD very bad
-
-	
-*------------------------------------------------------------------------------*
-*	PART 2.2: Probit w/o TECH including interactions, using 3NN
-*------------------------------------------------------------------------------*
-** TECH==1	
-*----------
-	cap drop osa1 
-	cap drop p1* 
-	global D "OWN PORT" /*TECH*/
-	global C "logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015"
-	cap teffects psmatch (logwages2017) ///
-					 (FDI2016 i.($D)##c.($C), probit) if TECH==1,	///
-					  nneighbor(3) osample(osa1) generate(p1)
-	teffects psmatch (logwages2017) ///
-					 (FDI2016 i.($D)##c.($C), probit) if TECH==1 & osa1==0,	///
-					  nneighbor(3) generate(p1)
-
-					  
-	teffects overlap, ptlevel(1) saving($results/04_Robustness/WAGES_3NN#dc_TECH1.gph, replace)
-	graph export $results/04_Robustness/WAGES_3NN#dc_TECH1.pdf, as(pdf) replace
-	// bad overlap
-	
-	tebalance summarize
-	// SD very bad
-
-	// no point in running interaction model with other subsamples 
 
