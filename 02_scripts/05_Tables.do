@@ -22,10 +22,14 @@
 *	Table 1: NN1, NN5, caliper(0.05)
 *------------------------------------------------------------------------------*//
 
-
-generate TFPS17=  (TFP2017-3.656046)/2.056464
-generate emp2015= exp(logemp2015)
-
+//	Setting globals and generating variables
+	
+	cap generate TFPS17=  (TFP2017-3.656046)/2.056464
+	cap generate emp2015= exp(logemp2015)
+	
+	global F "OWN TECH RD2015"
+	global C "logwages2015 TFP2015 emp2015 DEBTS2015"
+	
 
 	//NN1
 		//ATE
