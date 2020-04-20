@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.4.8)  18 APR 2020 09:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.4.8)  20 APR 2020 12:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -43,7 +43,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 4.
 
-Overfull \hbox (74.88972pt too wide) in paragraph at lines 4--18
+Overfull \hbox (143.9179pt too wide) in paragraph at lines 4--15
 [][] 
  []
 
@@ -62,7 +62,7 @@ Here is how much of TeX's memory you used:
 </usr/local/texlive/2019/texmf-dist/fonts/type1/publ
 ic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmr10.pfb>
-Output written on Table3_Robustness.pdf (1 page, 26049 bytes).
+Output written on Table3_Robustness.pdf (1 page, 25531 bytes).
 PDF statistics:
  16 PDF objects out of 1000 (max. 8388607)
  10 compressed objects within 1 object stream
