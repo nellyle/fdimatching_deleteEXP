@@ -24,7 +24,7 @@
 *------------------------------------------------------------------------------*
 
 //	Adjust root file:	
-	global root	"C:\Users\schne\Documents\GitHub\try\fdimatching_deleteEXP"
+	global root	"C:/Users/Emilie/Documents/Emilie/Master/Nottingham/2_Appl_Microeconometrics/fdimatching_deleteEXP"
 
 	global input	"$root/01_input"
 	global scripts	"$root/02_scripts"
@@ -49,19 +49,28 @@
 	label var logwages2017 "Log wages"
 	label var TFP2017 "TFP"
 
-//	Unlogging employment before treatment	
+//	Unlogging employment 
+	// before treatment	
 	gen emp15 = exp(logemp2015), after(logemp2015)
-	label var emp2015 "Employment"
+	label var emp15 "Employment"
 
-//	Unlogging employment after treatment	
+	// after treatment	
 	gen emp17 = exp(logemp2017), after(logemp2017)
-	label var emp2017 "Employment 2017"
+	label var emp17 "Employment 2017"
+	
+//	Unlogging Wages
+	gen wages15 = exp(logwages2015), after(logwages2015)
+	label var wages15 "Wages"
+	
+//	Unlogging Debts	
+	gen debts15 = exp(DEBTS2015), after(DEBTS2015)
+	label var debts15 "Debt"	
 	
 //	Standardizing outcome variable TFP2017	
-	gen TFPS17 = (TFP2017-3.656046)/2.056464, after TFP2017
+	gen TFPS17 = (TFP2017-3.656046)/2.056464, after(TFP2017)
 	label var TFPS17 "Standarized TFP"
 	
-	save $input/FDI_project_clean
+	save $input/FDI_project_clean, replace
 
 ********************************************************************************
 *			PART 2: Descriptive Analysis
