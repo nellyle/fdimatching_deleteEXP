@@ -24,7 +24,7 @@
 *------------------------------------------------------------------------------*
 
 //	Adjust root file:	
-	global root	"C:/Users/Emilie/Documents/Emilie/Master/Nottingham/2_Appl_Microeconometrics/fdimatching_deleteEXP"
+	global root	"C:\Users\schne\Documents\GitHub\try\fdimatching_deleteEXP"
 
 	global input	"$root/01_input"
 	global scripts	"$root/02_scripts"

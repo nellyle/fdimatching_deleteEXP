@@ -28,9 +28,9 @@
 
 cap drop osa1
 cap drop p*
-teffects psmatch (TFPST2017)(FDI2016  i.($S) c.($P)) , osample(osa1) gen(p1)
+teffects psmatch (TFPST2017)(FDI2016  i.($S) c.($P)) , osample(osa1) gen(p1) atet
 tebalance summarize
-*teffects overlap
+teffects overlap
 
 
 cap drop osa1
