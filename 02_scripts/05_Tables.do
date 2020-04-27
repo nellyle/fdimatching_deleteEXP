@@ -44,7 +44,7 @@
 					 (FDI2016 i.($F) c.($C), logit),	///
 					  osample(osa1) generate(p1)
 	outreg2 using $results/05_Tables/Table2_TFP.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1)
-	
+	tebalance summarize
 
 *====================*
 * (2) NN5 caliper 0.05
@@ -60,10 +60,12 @@
 	 
 	// Reestimate
 	cap teffects psmatch (TFPS17) ///
-					 (FDI2016 ($F)($C), logit) if osa1==0,	///
+					 (FDI2016 i.($F) c.($C), logit) if osa1==0,	///
 					  nneighbor(5) caliper(.05)  generate(p1) 
 					  
 	outreg2 using $results/05_Tables/Table2_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1) 
+	
+ tebalance summarize 
 	
 *====================*
 * (3) IWP:
@@ -73,15 +75,17 @@
 cap drop osa1
 	teffects ipw (TFPS17) (FDI2016 i.($F) c.($C), logit),  	osample(osa1) 
 	outreg2 using $results/05_Tables/Table2_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon eqdrop(TME1) 
+	tebalance summarize
 	
 *====================*
 * (4) AIWP:
 *====================*	
 // ATE
 	cap drop osa1
-teffects aipw (($F)($C) )(i.($F) c.($C) ) 
+teffects aipw (TFP2017 ($F)($C) )(FDI2016 i.($F) c.($C) ) 
 
 	outreg2 using $results/05_Tables/Table2_TFP.tex, append dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 emp2015 DEBTS2015 i.TECH RD2015) nocon  eqdrop(OME0 OME1 TME1)
+	tebalance summarize
 					
 /********************************************************************************
 			TABLE 3: ROBUSTNESS
