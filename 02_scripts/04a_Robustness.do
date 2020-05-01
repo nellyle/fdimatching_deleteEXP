@@ -24,6 +24,8 @@
 *			(2) MEDIUM LOW-TECH INDUSTRIES
 *			(3) MEDIUM HIGH-TECH INDUSTRIES
 *			(4)	HIGH-TECH INDUSTRIES
+*
+*APPENDIX:	FREQUENCY OF FDI BY TECH
 *------------------------------------------------------------------------------*/
 
 
@@ -167,3 +169,10 @@ display (0.1600066*4194+0.0864057*1685+0.1721028*3539+0.1802721*1905)/11232 /*= 
 //find bigger effect if require observations to be matched with observations of same technology intensity only*/
 
 
+********************************************************************************
+*			APPENDIX:	FREQUENCY OF FDI BY TECH
+********************************************************************************
+
+tab2 TECH FDI2016, row
+
+tabout TECH FDI2016 using $results/05_Tables/Table7a_Robustness.tex, cells(freq row cum) format(0 1) style(tex) clab(No. Col_% Cum_%) replace
