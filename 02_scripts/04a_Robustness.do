@@ -10,15 +10,21 @@
 		OUTLINE:	TABLE 3: ROBUSTNESS
 					
 /********************************************************************************
-			TABLE 3: ROBUSTNESS
+			TABLE 6 & 7: ROBUSTNESS
 *******************************************************************************/
 *------------------------------------------------------------------------------*
-*	(1) NN1 interaction
-*	(2) NN1 (excluding emp outlier>8.000.000)
-*	(3) NN1 (including port)
-*	(4) ATT for NN1
-*	(5) - (6) NN1 by TECH
-*------------------------------------------------------------------------------*//
+*TABLE 6:	ROBUSTNESS OF RESULTS
+*			(1) NN1 interaction
+*			(2) NN1 (excluding emp outlier>8.000.000)
+*			(3) NN1 (including port)
+*			(4) ATT for NN1
+*
+*TABLE 7:	ATE BY TECH INTENSITY
+*			(1) LOW-TECH INDUSTRIES
+*			(2) MEDIUM LOW-TECH INDUSTRIES
+*			(3) MEDIUM HIGH-TECH INDUSTRIES
+*			(4)	HIGH-TECH INDUSTRIES
+*------------------------------------------------------------------------------*/
 
 
 //	Setting globals and generating variables
@@ -29,6 +35,10 @@
 	global F "OWN TECH RD2015"
 	global C "logwages2015 TFP2015 emp2015 DEBTS2015"
 
+	
+********************************************************************************
+*			TABLE 6:	ROBUSTNESS OF RESULTS
+********************************************************************************
 
 *====================*
 * (1) NN1 interaction
@@ -40,7 +50,7 @@
 						(FDI2016 i.($F)##c.($C), logit),	///
 						osample(osa1) generate(p1)
 
-	outreg2 using $results/05_Tables/Table3_Robustness.tex, replace dec(3) drop(i.OWN i.TECH logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/05_Tables/Table6_Robustness.tex, replace dec(3) drop(i.OWN i.TECH logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1) 
 
 
 *====================*
@@ -53,7 +63,7 @@
 						(FDI2016 i.($F) c.($C), logit) if emp2015<4000000,		///
 						osample(osa1) generate(p1)
 
-	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/05_Tables/Table6_Robustness.tex, append dec(3) drop(i.OWN i.TECH logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1) 
 
 
 *====================*
@@ -67,7 +77,7 @@ global P "OWN TECH RD2015 PORT"
 	cap teffects psmatch (TFPS17) ///
 					 (FDI2016 i.($P) c.($C), logit),	///
 					  osample(osa1) generate(p1)
-	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)
+	outreg2 using $results/05_Tables/Table6_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)
 
 
 *====================*
@@ -80,14 +90,16 @@ global P "OWN TECH RD2015 PORT"
 						(FDI2016 i.($F) c.($C), logit), atet	///
 						osample(osa1) generate(p1)
 
-	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1) 
+	outreg2 using $results/05_Tables/Table6_Robustness.tex, append dec(3) drop(i.OWN i.TECH logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1) 
 
-*------------------------------------------------------------------------------*
-*	ATE OF FDI ON TFP BY TECH INTENSITY
-*------------------------------------------------------------------------------*	
+	
+
+********************************************************************************
+*			TABLE 7:	ATE BY TECH INTENSITY
+********************************************************************************
 
 *====================*
-* (5) NN1 TECH=1
+* (1) NN1 TECH=1
 *====================*
 
 	cap drop osa1 
@@ -100,10 +112,10 @@ global P "OWN TECH RD2015 PORT"
 	// ATE =  .1600066 
 	//4194 observations
 
-	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)
+	outreg2 using $results/05_Tables/Table7_Robustness.tex, replace dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)
 		
 *====================*
-* (6) NN1 TECH=2
+* (2) NN1 TECH=2
 *====================*
 	
 	cap drop osa1 
@@ -116,10 +128,10 @@ global P "OWN TECH RD2015 PORT"
 	// ATE = .0864057 
 	// 1685 observations
 
-	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)	
+	outreg2 using $results/05_Tables/Table7_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)	
 	
 *====================*
-* (7) NN1 TECH=3
+* (3) NN1 TECH=3
 *====================*
 	
 	cap drop osa1 
@@ -132,10 +144,10 @@ global P "OWN TECH RD2015 PORT"
 	// ATE = .1721028  
 	// 3539 observations
 
-	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)
+	outreg2 using $results/05_Tables/Table7_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)
 	
 *====================*
-* (8) NN1 TECH=4
+* (4) NN1 TECH=4
 *====================*
 	
 	cap drop osa1 
@@ -148,7 +160,7 @@ global P "OWN TECH RD2015 PORT"
 	// ATE = .1802721
 	// 1905 observations
 
-	outreg2 using $results/05_Tables/Table3_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)	
+	outreg2 using $results/05_Tables/Table7_Robustness.tex, append dec(3) drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)	
 	
 * Calculating ATE weighted by each sample size: 
 display (0.1600066*4194+0.0864057*1685+0.1721028*3539+0.1802721*1905)/11232 /*= 0.15750992*/
