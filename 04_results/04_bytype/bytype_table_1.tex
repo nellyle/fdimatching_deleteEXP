@@ -1,22 +1,25 @@
 \documentclass[]{article}
 \setlength{\pdfpagewidth}{18.5in} \setlength{\pdfpageheight}{11in}
 \begin{document}
-\begin{tabular}{lccccc} \hline
- & (1) & (2) & (3) & (4) & (5) \\
-VARIABLES & AIPW & IPW  & AIPW  & AIPW & AIPW \\ 
-&Mlogit&Mlogit&Logit&Logit&Logit\\
-\hline
- &  &  &  &  &   \\
-Exports-oriented FDI & 0.144*** &   0.157*** & 0.140*** &  &  \\
- & (0.006) &   (0.032) & (0.007) &  &\\
-Technology intensive FDI & 0.139***   & 0.112*** &  & 0.139*** &   \\
- & (0.005)  & (0.018) &  &  (0.005)&  \\
-Domestic market seeking FDI & 0.143*** &   0.134*** &  &  &0.143*** \\
- & (0.004)   & (0.011) &  &  & (0.004)  \\
-PO Means &   -0.057*** &   -0.068*** &-0.012  &-0.025**  & -0.017    \\
- &   (0.009) &   (0.010) &  (0.011)&(0.011)  & (0.011) \\
- Observations & 11,323  & 11,323 &  7,803  & 8,418 & 8,828  \\ \hline
-\multicolumn{6}{c}{ Robust standard errors in parentheses} \\
-\multicolumn{6}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
+\begin{tabular}{lcccccccccc} \hline
+ & (1) & (2) & (3) & (4) & (5) & (6) & (7) & (8) & (9) & (10) \\
+VARIABLES & ATE & POmean & ATE & POmean & ATE & POmean & ATE & POmean & ATE & POmean \\ \hline
+ &  &  &  &  &  &  &  &  &  &  \\
+r1vs0.FDITYPE2016 & 0.144*** &  & 0.157*** &  &  &  &  &  &  &  \\
+ & (0.006) &  & (0.032) &  &  &  &  &  &  &  \\
+r2vs0.FDITYPE2016 & 0.139*** &  & 0.112*** &  &  &  &  &  &  &  \\
+ & (0.005) &  & (0.018) &  &  &  &  &  &  &  \\
+r3vs0.FDITYPE2016 & 0.143*** &  & 0.134*** &  &  &  &  &  &  &  \\
+ & (0.004) &  & (0.011) &  &  &  &  &  &  &  \\
+0.FDITYPE2016 &  & -0.057*** &  & -0.068*** &  &  &  &  &  &  \\
+ &  & (0.009) &  & (0.010) &  &  &  &  &  &  \\
+r1vs0.FDI2016 &  &  &  &  & 0.140*** &  & 0.139*** &  & 0.143*** &  \\
+ &  &  &  &  & (0.007) &  & (0.005) &  & (0.004) &  \\
+0.FDI2016 &  &  &  &  &  & -0.012 &  & -0.025** &  & -0.017 \\
+ &  &  &  &  &  & (0.011) &  & (0.011) &  & (0.011) \\
+ &  &  &  &  &  &  &  &  &  &  \\
+ Observations & 11,323 & 11,323 & 11,323 & 11,323 & 7,803 & 7,803 & 8,418 & 8,418 & 8,828 & 8,828 \\ \hline
+\multicolumn{11}{c}{ Robust standard errors in parentheses} \\
+\multicolumn{11}{c}{ *** p$<$0.01, ** p$<$0.05, * p$<$0.1} \\
 \end{tabular}
 \end{document}

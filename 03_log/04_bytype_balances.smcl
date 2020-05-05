@@ -3,7 +3,7 @@
       name:  {res}<unnamed>
        {txt}log:  {res}C:\Users\schne\Documents\GitHub\try\fdimatching_deleteEXP/03_log/04_bytype_balances.smcl
   {txt}log type:  {res}smcl
- {txt}opened on:  {res}20 Apr 2020, 15:35:40
+ {txt}opened on:  {res} 5 May 2020, 11:41:44
 {txt}
 {com}. 
 .         cap teffects aipw (TFPST2017  i.($S) c.($P) )(FDITYPE2016  i.($S) c.($P) )
@@ -36,11 +36,13 @@
 {col 3}{text}Medium high-~s{col 19}{c |}{result}{space 2}-.2663044{col 32}{space 2}-.0193414{col 44}{space 4} .7842619{col 56}{space 2} .9838819
 {col 3}{text}High-tech in~s{col 19}{c |}{result}{space 2}-.5946766{col 32}{space 2} .0430247{col 44}{space 4}  .222571{col 56}{space 2} 1.076075
 {col 19}{text}{c |}
+{res}{col 3}{text}         RD2015{col 19}{c |}
+{res}{col 3}{text}             1{col 19}{c |}{result}{space 2}-.1977282{col 32}{space 2} .0562092{col 44}{space 4} .5536423{col 56}{space 2} 1.130642
+{col 19}{text}{c |}
 {res}{col 3}{text}   logwages2015{col 19}{c |}{result}{space 2}-.1833482{col 32}{space 2}-.0587338{col 44}{space 4} .9447749{col 56}{space 2} .9103155
 {col 3}{text}        TFP2015{col 19}{c |}{result}{space 2}-.2141912{col 32}{space 2} .0133092{col 44}{space 4} .9704629{col 56}{space 2} 1.001579
 {col 3}{text}          emp15{col 19}{c |}{result}{space 2} .0249499{col 32}{space 2} .0555541{col 44}{space 4} .3077821{col 56}{space 2} .5456246
 {col 3}{text}      DEBTS2015{col 19}{c |}{result}{space 2}-.0665162{col 32}{space 2} .0400558{col 44}{space 4} 1.024821{col 56}{space 2} .9617875
-{col 3}{text}         RD2015{col 19}{c |}{result}{space 2}-.1977282{col 32}{space 2} .0562092{col 44}{space 4} .5536423{col 56}{space 2} 1.130642
 {col 3}{text}{hline 16}{c +}{hline 12}{hline 12}{hline 12}{hline 12}
 {col 3}{result}Technology in~I{col 19}{text}{c |}
 {res}{col 3}{text}            OWN{col 19}{c |}
@@ -53,11 +55,13 @@
 {col 3}{text}Medium high-~s{col 19}{c |}{result}{space 2}-.2403611{col 32}{space 2}-.0011011{col 44}{space 4} .8089302{col 56}{space 2} .9991046
 {col 3}{text}High-tech in~s{col 19}{c |}{result}{space 2}-.5607553{col 32}{space 2}-.0181223{col 44}{space 4} .2633246{col 56}{space 2} .9676973
 {col 19}{text}{c |}
+{res}{col 3}{text}         RD2015{col 19}{c |}
+{res}{col 3}{text}             1{col 19}{c |}{result}{space 2}-.0894951{col 32}{space 2}-.0019277{col 44}{space 4} .7908312{col 56}{space 2} .9955541
+{col 19}{text}{c |}
 {res}{col 3}{text}   logwages2015{col 19}{c |}{result}{space 2}-.1365085{col 32}{space 2}-.0151862{col 44}{space 4} .9818968{col 56}{space 2} 1.023026
 {col 3}{text}        TFP2015{col 19}{c |}{result}{space 2}-.2091214{col 32}{space 2}-.0276276{col 44}{space 4} .9481316{col 56}{space 2} .9447849
 {col 3}{text}          emp15{col 19}{c |}{result}{space 2} .0498435{col 32}{space 2} .0196187{col 44}{space 4} 10.65892{col 56}{space 2} 1.505357
 {col 3}{text}      DEBTS2015{col 19}{c |}{result}{space 2}-.0186904{col 32}{space 2}-.0394986{col 44}{space 4} 1.105096{col 56}{space 2} 1.080391
-{col 3}{text}         RD2015{col 19}{c |}{result}{space 2}-.0894951{col 32}{space 2}-.0019277{col 44}{space 4} .7908312{col 56}{space 2} .9955541
 {col 3}{text}{hline 16}{c +}{hline 12}{hline 12}{hline 12}{hline 12}
 {col 3}{result}Domestic mark~I{col 19}{text}{c |}
 {res}{col 3}{text}            OWN{col 19}{c |}
@@ -70,11 +74,13 @@
 {col 3}{text}Medium high-~s{col 19}{c |}{result}{space 2} -.211331{col 32}{space 2} .0001045{col 44}{space 4} .8359902{col 56}{space 2} 1.000089
 {col 3}{text}High-tech in~s{col 19}{c |}{result}{space 2}-.5049792{col 32}{space 2} -.011019{col 44}{space 4} .3324869{col 56}{space 2} .9803731
 {col 19}{text}{c |}
+{res}{col 3}{text}         RD2015{col 19}{c |}
+{res}{col 3}{text}             1{col 19}{c |}{result}{space 2} .2082867{col 32}{space 2} .0056421{col 44}{space 4} 1.503124{col 56}{space 2} 1.013047
+{col 19}{text}{c |}
 {res}{col 3}{text}   logwages2015{col 19}{c |}{result}{space 2}-.0997247{col 32}{space 2} .0102345{col 44}{space 4} .9871457{col 56}{space 2} 1.013854
 {col 3}{text}        TFP2015{col 19}{c |}{result}{space 2}-.1378965{col 32}{space 2}-.0090628{col 44}{space 4} .9336303{col 56}{space 2}  .938248
 {col 3}{text}          emp15{col 19}{c |}{result}{space 2} .0558724{col 32}{space 2} .0075184{col 44}{space 4} 3.896824{col 56}{space 2}  .902008
 {col 3}{text}      DEBTS2015{col 19}{c |}{result}{space 2}-.0741218{col 32}{space 2}-.0206654{col 44}{space 4} 1.020553{col 56}{space 2}  .979131
-{col 3}{text}         RD2015{col 19}{c |}{result}{space 2} .2082867{col 32}{space 2} .0056421{col 44}{space 4} 1.503124{col 56}{space 2} 1.013047
 {col 3}{text}{hline 16}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}
 {res}{txt}
 {com}.         
@@ -108,11 +114,13 @@
 {col 3}{text}Medium high-~s{col 19}{c |}{result}{space 2}-.2663044{col 32}{space 2}-.0193414{col 44}{space 4} .7842619{col 56}{space 2} .9838819
 {col 3}{text}High-tech in~s{col 19}{c |}{result}{space 2}-.5946766{col 32}{space 2} .0430247{col 44}{space 4}  .222571{col 56}{space 2} 1.076075
 {col 19}{text}{c |}
+{res}{col 3}{text}         RD2015{col 19}{c |}
+{res}{col 3}{text}             1{col 19}{c |}{result}{space 2}-.1977282{col 32}{space 2} .0562092{col 44}{space 4} .5536423{col 56}{space 2} 1.130642
+{col 19}{text}{c |}
 {res}{col 3}{text}   logwages2015{col 19}{c |}{result}{space 2}-.1833482{col 32}{space 2}-.0587338{col 44}{space 4} .9447749{col 56}{space 2} .9103155
 {col 3}{text}        TFP2015{col 19}{c |}{result}{space 2}-.2141912{col 32}{space 2} .0133092{col 44}{space 4} .9704629{col 56}{space 2} 1.001579
 {col 3}{text}          emp15{col 19}{c |}{result}{space 2} .0249499{col 32}{space 2} .0555541{col 44}{space 4} .3077821{col 56}{space 2} .5456246
 {col 3}{text}      DEBTS2015{col 19}{c |}{result}{space 2}-.0665162{col 32}{space 2} .0400558{col 44}{space 4} 1.024821{col 56}{space 2} .9617875
-{col 3}{text}         RD2015{col 19}{c |}{result}{space 2}-.1977282{col 32}{space 2} .0562092{col 44}{space 4} .5536423{col 56}{space 2} 1.130642
 {col 3}{text}{hline 16}{c +}{hline 12}{hline 12}{hline 12}{hline 12}
 {col 3}{result}Technology in~I{col 19}{text}{c |}
 {res}{col 3}{text}            OWN{col 19}{c |}
@@ -125,11 +133,13 @@
 {col 3}{text}Medium high-~s{col 19}{c |}{result}{space 2}-.2403611{col 32}{space 2}-.0011011{col 44}{space 4} .8089302{col 56}{space 2} .9991046
 {col 3}{text}High-tech in~s{col 19}{c |}{result}{space 2}-.5607553{col 32}{space 2}-.0181223{col 44}{space 4} .2633246{col 56}{space 2} .9676973
 {col 19}{text}{c |}
+{res}{col 3}{text}         RD2015{col 19}{c |}
+{res}{col 3}{text}             1{col 19}{c |}{result}{space 2}-.0894951{col 32}{space 2}-.0019277{col 44}{space 4} .7908312{col 56}{space 2} .9955541
+{col 19}{text}{c |}
 {res}{col 3}{text}   logwages2015{col 19}{c |}{result}{space 2}-.1365085{col 32}{space 2}-.0151862{col 44}{space 4} .9818968{col 56}{space 2} 1.023026
 {col 3}{text}        TFP2015{col 19}{c |}{result}{space 2}-.2091214{col 32}{space 2}-.0276276{col 44}{space 4} .9481316{col 56}{space 2} .9447849
 {col 3}{text}          emp15{col 19}{c |}{result}{space 2} .0498435{col 32}{space 2} .0196187{col 44}{space 4} 10.65892{col 56}{space 2} 1.505357
 {col 3}{text}      DEBTS2015{col 19}{c |}{result}{space 2}-.0186904{col 32}{space 2}-.0394986{col 44}{space 4} 1.105096{col 56}{space 2} 1.080391
-{col 3}{text}         RD2015{col 19}{c |}{result}{space 2}-.0894951{col 32}{space 2}-.0019277{col 44}{space 4} .7908312{col 56}{space 2} .9955541
 {col 3}{text}{hline 16}{c +}{hline 12}{hline 12}{hline 12}{hline 12}
 {col 3}{result}Domestic mark~I{col 19}{text}{c |}
 {res}{col 3}{text}            OWN{col 19}{c |}
@@ -142,11 +152,13 @@
 {col 3}{text}Medium high-~s{col 19}{c |}{result}{space 2} -.211331{col 32}{space 2} .0001045{col 44}{space 4} .8359902{col 56}{space 2} 1.000089
 {col 3}{text}High-tech in~s{col 19}{c |}{result}{space 2}-.5049792{col 32}{space 2} -.011019{col 44}{space 4} .3324869{col 56}{space 2} .9803731
 {col 19}{text}{c |}
+{res}{col 3}{text}         RD2015{col 19}{c |}
+{res}{col 3}{text}             1{col 19}{c |}{result}{space 2} .2082867{col 32}{space 2} .0056421{col 44}{space 4} 1.503124{col 56}{space 2} 1.013047
+{col 19}{text}{c |}
 {res}{col 3}{text}   logwages2015{col 19}{c |}{result}{space 2}-.0997247{col 32}{space 2} .0102345{col 44}{space 4} .9871457{col 56}{space 2} 1.013854
 {col 3}{text}        TFP2015{col 19}{c |}{result}{space 2}-.1378965{col 32}{space 2}-.0090628{col 44}{space 4} .9336303{col 56}{space 2}  .938248
 {col 3}{text}          emp15{col 19}{c |}{result}{space 2} .0558724{col 32}{space 2} .0075184{col 44}{space 4} 3.896824{col 56}{space 2}  .902008
 {col 3}{text}      DEBTS2015{col 19}{c |}{result}{space 2}-.0741218{col 32}{space 2}-.0206654{col 44}{space 4} 1.020553{col 56}{space 2}  .979131
-{col 3}{text}         RD2015{col 19}{c |}{result}{space 2} .2082867{col 32}{space 2} .0056421{col 44}{space 4} 1.503124{col 56}{space 2} 1.013047
 {col 3}{text}{hline 16}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}
 {res}{txt}
 {com}.         
@@ -170,7 +182,6 @@
 {col 3}{text}        TFP2015{col 19}{c |}{result}{space 2}-.2141912{col 32}{space 2}-.0226294{col 44}{space 4} .9704629{col 56}{space 2} 1.017289
 {col 3}{text}          emp15{col 19}{c |}{result}{space 2} .0249499{col 32}{space 2} .1195926{col 44}{space 4} .3077821{col 56}{space 2} 1.358915
 {col 3}{text}      DEBTS2015{col 19}{c |}{result}{space 2}-.0665162{col 32}{space 2} .0552287{col 44}{space 4} 1.024821{col 56}{space 2} .9583953
-{col 3}{text}         RD2015{col 19}{c |}{result}{space 2}-.1977282{col 32}{space 2} .0875198{col 44}{space 4} .5536423{col 56}{space 2} 1.221739
 {col 19}{text}{c |}
 {res}{col 3}{text}            OWN{col 19}{c |}
 {res}{col 3}{text}  Subsidiaries{col 19}{c |}{result}{space 2}  .029319{col 32}{space 2}-.0418346{col 44}{space 4} 1.037004{col 56}{space 2} .9471116
@@ -181,6 +192,9 @@
 {res}{col 3}{text}Medium low-t~s{col 19}{c |}{result}{space 2} .0789971{col 32}{space 2}-.0161178{col 44}{space 4} 1.173675{col 56}{space 2} .9655996
 {col 3}{text}Medium high-~s{col 19}{c |}{result}{space 2}-.2663044{col 32}{space 2}-.0297073{col 44}{space 4} .7842619{col 56}{space 2} .9791179
 {col 3}{text}High-tech in~s{col 19}{c |}{result}{space 2}-.5946766{col 32}{space 2} .0462235{col 44}{space 4}  .222571{col 56}{space 2} 1.062059
+{col 19}{text}{c |}
+{res}{col 3}{text}         RD2015{col 19}{c |}
+{res}{col 3}{text}             1{col 19}{c |}{result}{space 2}-.1977282{col 32}{space 2} .0875198{col 44}{space 4} .5536423{col 56}{space 2} 1.221739
 {col 3}{text}{hline 16}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}
 {res}{txt}
 {com}.         
@@ -204,7 +218,6 @@
 {col 3}{text}        TFP2015{col 19}{c |}{result}{space 2}-.2091214{col 32}{space 2}-.0607962{col 44}{space 4} .9481316{col 56}{space 2} .9409475
 {col 3}{text}          emp15{col 19}{c |}{result}{space 2} .0498435{col 32}{space 2}  .037521{col 44}{space 4} 10.65892{col 56}{space 2} 1.875564
 {col 3}{text}      DEBTS2015{col 19}{c |}{result}{space 2}-.0186904{col 32}{space 2}-.0532078{col 44}{space 4} 1.105096{col 56}{space 2} 1.091496
-{col 3}{text}         RD2015{col 19}{c |}{result}{space 2}-.0894951{col 32}{space 2} .0036693{col 44}{space 4} .7908312{col 56}{space 2} 1.009067
 {col 19}{text}{c |}
 {res}{col 3}{text}            OWN{col 19}{c |}
 {res}{col 3}{text}  Subsidiaries{col 19}{c |}{result}{space 2}-.0227822{col 32}{space 2} .0006329{col 44}{space 4} .9717411{col 56}{space 2} 1.000803
@@ -215,6 +228,9 @@
 {res}{col 3}{text}Medium low-t~s{col 19}{c |}{result}{space 2} .1501373{col 32}{space 2} .0029158{col 44}{space 4} 1.327181{col 56}{space 2}    1.006
 {col 3}{text}Medium high-~s{col 19}{c |}{result}{space 2}-.2403611{col 32}{space 2}-.0057285{col 44}{space 4} .8089302{col 56}{space 2} .9959361
 {col 3}{text}High-tech in~s{col 19}{c |}{result}{space 2}-.5607553{col 32}{space 2}-.0217103{col 44}{space 4} .2633246{col 56}{space 2} .9682538
+{col 19}{text}{c |}
+{res}{col 3}{text}         RD2015{col 19}{c |}
+{res}{col 3}{text}             1{col 19}{c |}{result}{space 2}-.0894951{col 32}{space 2} .0036693{col 44}{space 4} .7908312{col 56}{space 2} 1.009067
 {col 3}{text}{hline 16}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}
 {res}{txt}
 {com}.         
@@ -238,7 +254,6 @@
 {col 3}{text}        TFP2015{col 19}{c |}{result}{space 2}-.1378965{col 32}{space 2}-.0343519{col 44}{space 4} .9336303{col 56}{space 2} .9395222
 {col 3}{text}          emp15{col 19}{c |}{result}{space 2} .0558724{col 32}{space 2} .0171481{col 44}{space 4} 3.896824{col 56}{space 2} .9394148
 {col 3}{text}      DEBTS2015{col 19}{c |}{result}{space 2}-.0741218{col 32}{space 2}-.0281171{col 44}{space 4} 1.020553{col 56}{space 2} .9867092
-{col 3}{text}         RD2015{col 19}{c |}{result}{space 2} .2082867{col 32}{space 2} .0082827{col 44}{space 4} 1.503124{col 56}{space 2} 1.017821
 {col 19}{text}{c |}
 {res}{col 3}{text}            OWN{col 19}{c |}
 {res}{col 3}{text}  Subsidiaries{col 19}{c |}{result}{space 2}-.0381328{col 32}{space 2}-.0225617{col 44}{space 4} .9519123{col 56}{space 2} .9708481
@@ -249,6 +264,9 @@
 {res}{col 3}{text}Medium low-t~s{col 19}{c |}{result}{space 2} .1164522{col 32}{space 2} .0025253{col 44}{space 4} 1.254467{col 56}{space 2} 1.005217
 {col 3}{text}Medium high-~s{col 19}{c |}{result}{space 2} -.211331{col 32}{space 2}-.0033973{col 44}{space 4} .8359902{col 56}{space 2} .9975718
 {col 3}{text}High-tech in~s{col 19}{c |}{result}{space 2}-.5049792{col 32}{space 2}-.0136332{col 44}{space 4} .3324869{col 56}{space 2} .9796925
+{col 19}{text}{c |}
+{res}{col 3}{text}         RD2015{col 19}{c |}
+{res}{col 3}{text}             1{col 19}{c |}{result}{space 2} .2082867{col 32}{space 2} .0082827{col 44}{space 4} 1.503124{col 56}{space 2} 1.017821
 {col 3}{text}{hline 16}{c BT}{hline 12}{hline 12}{hline 12}{hline 12}
 {res}{txt}
 {com}.         
@@ -256,7 +274,7 @@
       {txt}name:  {res}<unnamed>
        {txt}log:  {res}C:\Users\schne\Documents\GitHub\try\fdimatching_deleteEXP/03_log/04_bytype_balances.smcl
   {txt}log type:  {res}smcl
- {txt}closed on:  {res}20 Apr 2020, 15:36:08
+ {txt}closed on:  {res} 5 May 2020, 11:42:15
 {txt}{.-}
 {smcl}
 {txt}{sf}{ul off}
