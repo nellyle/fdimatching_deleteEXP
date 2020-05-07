@@ -27,7 +27,7 @@
 *------------------------------------------------------------------------------*
 
 //	Adjust root file:	
-	global root	"C:/Users/Emilie/Documents/Emilie/Uni/Master/Nottingham/2_Appl_Microeconometrics/fdimatching_clean"
+	global root	"/Users/nelly/Documents/GitHub/fdimatching_deleteEXP"
 
 	global input	"$root/01_input"
 	global scripts	"$root/02_scripts"
@@ -51,6 +51,21 @@
 	label var RD2015 "R&D dummy"
 	label var logwages2017 "Log wages"
 	label var TFP2017 "TFP"
+	
+*------------------------------------------------------------------------------*
+*	PART 1.3: Transforming variables
+*------------------------------------------------------------------------------*
+
+	generate TFPS17=  (TFP2017-3.656046)/2.056464
+	generate emp2015= exp(logemp2015)
+
+*------------------------------------------------------------------------------*
+*	PART 1.4: Set globals for variables
+*------------------------------------------------------------------------------*
+
+	global F "OWN TECH RD2015"
+	global C "logwages2015 TFP2015 emp2015 DEBTS2015"
+
 
 ********************************************************************************
 *			PART 2: Descriptive Analysis
