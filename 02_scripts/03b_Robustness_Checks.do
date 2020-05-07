@@ -86,9 +86,6 @@ global P "OWN TECH RD2015 PORT"
 					 (FDI2016  i.($F) c.($C), logit) if TECH==1,	///
 					  osample(osa1) generate(p1)
 	tebalance summarize				  
-	// very good SD and variance ratio
-	// ATE =  .1600066 
-	//4194 observations
 
 	outreg2 using $results/05_Tables/Table7_Robustness.tex, replace dec(3) ///
 	drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)
@@ -103,8 +100,6 @@ global P "OWN TECH RD2015 PORT"
 					 (FDI2016  i.($F) c.($C), logit) if TECH==2,	///
 					  osample(osa1) generate(p1)
 	tebalance summarize
-	// ATE = .0864057 
-	// 1685 observations
 
 	outreg2 using $results/05_Tables/Table7_Robustness.tex, append dec(3) ///
 	drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)	
@@ -119,8 +114,6 @@ global P "OWN TECH RD2015 PORT"
 					 (FDI2016  i.($F) c.($C), logit) if TECH==3,	///
 					  osample(osa1) generate(p1)
 	tebalance summarize
-	// ATE = .1721028  
-	// 3539 observations
 
 	outreg2 using $results/05_Tables/Table7_Robustness.tex, append dec(3) ///
 	drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)
@@ -135,8 +128,6 @@ global P "OWN TECH RD2015 PORT"
 					 (FDI2016  i.($F) c.($C), logit) if TECH==4,	///
 					  osample(osa1) generate(p1)
 	tebalance summarize				  				  
-	// ATE = .1802721
-	// 1905 observations
 
 	outreg2 using $results/05_Tables/Table7_Robustness.tex, append dec(3) ///
 	drop(i.OWN i.TECH i.PORT logwages2015 TFP2015 emp2015 DEBTS2015  RD2015) nocon eqdrop(TME1)	
