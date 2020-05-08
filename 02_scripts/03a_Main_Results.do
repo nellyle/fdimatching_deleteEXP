@@ -22,7 +22,7 @@
 *	PART 1.1: Setting globals and generating variables 
 *------------------------------------------------------------------------------*
 	
-	cap generate TFPS17=  (TFP2017-3.656046)/2.056464
+	cap generate TFPS17=  (TFP2017-3.656046)/2.056464  // standardize outcome variable
 	cap generate emp2015= exp(logemp2015)
 	
 	global F "OWN TECH RD2015"
