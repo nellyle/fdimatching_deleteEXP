@@ -27,7 +27,7 @@
 
 cap drop osa1
 cap drop p*
-teffects psmatch (TFPST2017)(FDI2016  i.($S) c.($P)) , osample(osa1) gen(p1) atet
+teffects psmatch (TFPST2017)(FDI2016  i.($S) c.($P)) 
 tebalance summarize
 teffects overlap
 
@@ -54,7 +54,10 @@ tebalance summarize
 *AIPW by type
 cap drop osa1
 teffects aipw (TFPST2017  i.($S) c.($P) )(FDITYPE2016  i.($S) c.($P) ) , osample(osa1) 
-teffects overlap
+teffects overlap, ptlevel(1) saving($results\04_bytype\bytype_overlap_l1.gph, replace)
+teffects overlap, ptlevel(2)  saving($results\04_bytype\bytype_overlap_l2.gph, replace)
+teffects overlap, ptlevel(3)  saving($results\04_bytype\bytype_overlap_l3.gph, replace)
+
 outreg2 using $results\04_bytype\bytype_table_1.tex, replace dec(3) drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) nocon eqdrop(OME0 OME1 OME2 OME3 TME1 TME2 TME3) lab()
 tebalance summarize 
 *worst is 8% diff for independent, 0.7 for logemp
