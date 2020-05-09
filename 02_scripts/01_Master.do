@@ -20,8 +20,10 @@
 			PART 1: Prepare Folder Paths
 *******************************************************************************/
 
+	cap log close
+	log using $log/fdi_matching, replace
 	clear all
-
+	
 *------------------------------------------------------------------------------*
 *	PART 1.1: Set globals for do-file routines
 *------------------------------------------------------------------------------*
@@ -66,17 +68,12 @@
 	global F "OWN TECH RD2015"
 	global C "logwages2015 TFP2015 emp2015 DEBTS2015"
 
-
 ********************************************************************************
 *			PART 2: Descriptive Analysis
 ********************************************************************************
 
-	cap log close
-	log using $log/fdi_matching, replace
-
-			do $scripts/02_Descriptive_Analysis
+		do $scripts/02_Descriptive_Analysis
 	
-
 
 ********************************************************************************
 *			PART 3: Results

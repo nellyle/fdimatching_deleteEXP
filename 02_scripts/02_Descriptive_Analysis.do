@@ -27,10 +27,6 @@
 	corr	FDI2016 ///
 			OWN TECH PORT ///
 			logwages2015 TFP2015 emp15 DEBTS2015 EXP2015 RD2015 
-			
-/*	- 	FDI2016 is positively correlated to PORT, logemp2015, EXP2015 and 
-		negatively correlated to TECH	
-	-	TECH is strongly correlated to both PORT and EXP 					*/
 
 	
 ********************************************************************************
@@ -38,7 +34,8 @@
 ********************************************************************************
 
 //	Continuous variables	
-	outreg2 using "$results/02_Descriptive_Analysis/summarystats.tex", sum(detail) replace ///
+	outreg2 using "$results/02_Descriptive_Analysis/summarystats.tex", ///
+	sum(detail) replace ///
 	keep(wages15 TFP2015 debts15 EXP2015 emp15) ///
 	label eqkeep(mean p50 sd min max)
 	
@@ -55,9 +52,11 @@
 //	Employment
 	set scheme plotplainblind
 	scatter TFP2017 emp15, ytitle("TFP in 2017")	
-	graph save $results/02_Descriptive_Analysis/emp15_outliers.gph, replace
+	graph save $results/02_Descriptive_Analysis/emp15_outliers.gph, ///
+	replace
 
-	graph export $results/02_Descriptive_Analysis/emp15_outliers.png, as(png) replace
+	graph export $results/02_Descriptive_Analysis/emp15_outliers.png, ///
+	as(png) replace
 
 
 ********************************************************************************
