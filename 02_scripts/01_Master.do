@@ -10,9 +10,12 @@
 		
 		OUTLINE:	PART 1:	Prepare Folder Paths
 					PART 2: Descriptive Analysis
-					PART 3: PSM
-					PART 4: Robustness Checks 
+					PART 3: Results
+						 3.1: Effect of FDI on TFP
+						 3.2: Robustness Checks
+						 3.3: Analysis by  Type of FDI
 					
+
 ********************************************************************************
 			PART 1: Prepare Folder Paths
 *******************************************************************************/
@@ -28,7 +31,7 @@
 
 	global input	"$root/01_input"
 	global scripts	"$root/02_scripts"
-	global log		"$root/03_log"
+	global log	"$root/03_log"
 	global results	"$root/04_results"
 	
 	use "$input/FDI_project"
@@ -48,111 +51,65 @@
 	label var RD2015 "R&D dummy"
 	label var logwages2017 "Log wages"
 	label var TFP2017 "TFP"
+	
+*------------------------------------------------------------------------------*
+*	PART 1.3: Transforming variables
+*------------------------------------------------------------------------------*
 
-//	Unlogging employment 
-	// before treatment	
-	gen emp15 = exp(logemp2015), after(logemp2015)
-	label var emp15 "Employment"
+	generate TFPS17=  (TFP2017-3.656046)/2.056464
+	generate emp2015= exp(logemp2015)
 
-	// after treatment	
-	gen emp17 = exp(logemp2017), after(logemp2017)
-	label var emp17 "Employment 2017"
-	
-//	Unlogging Wages
-	gen wages15 = exp(logwages2015), after(logwages2015)
-	label var wages15 "Wages"
-	
-//	Unlogging Debts	
-	gen debts15 = exp(DEBTS2015), after(DEBTS2015)
-	label var debts15 "Debt"	
-	
-//	Standardizing outcome variable TFP2017	
-	gen TFPS17 = (TFP2017-3.656046)/2.056464, after(TFP2017)
-	label var TFPS17 "Standarized TFP"
-	
-	save $input/FDI_project_clean, replace
+*------------------------------------------------------------------------------*
+*	PART 1.4: Set globals for variables
+*------------------------------------------------------------------------------*
+
+	global F "OWN TECH RD2015"
+	global C "logwages2015 TFP2015 emp2015 DEBTS2015"
+
 
 ********************************************************************************
 *			PART 2: Descriptive Analysis
 ********************************************************************************
 
 	cap log close
-	log using $log/02_Descriptive_Analysis, replace
+	log using $log/fdi_matching, replace
 
 			do $scripts/02_Descriptive_Analysis
 	
-	log close
-	translate $log/02_Descriptive_Analysis.smcl $log/02_Descriptive_Analysis.pdf , ///
-	trans(smcl2pdf) replace 	
-	
-	erase $log/02_Descriptive_Analysis.smcl
 
 
 ********************************************************************************
-*			PART 3: Matching
+*			PART 3: Results
 ********************************************************************************
 
 *------------------------------------------------------------------------------*
-*	PART 3.1: PSM (1 neighbour)
+*	PART 3.1: Effect of FDI on TFP
 *------------------------------------------------------------------------------*
-	
-	cap log close
-	log using $log/03a_PSM, replace
 
-			do $scripts/03a_PSM
+		do $scripts/03a_Main_Results
+
+*------------------------------------------------------------------------------*
+*	PART 3.2: Robustness Checks
+*------------------------------------------------------------------------------*
+
+		do $scripts/03b_Robustness_Checks
+
+*------------------------------------------------------------------------------*
+*	PART 3.3: Analysis by  Type of FDI
+*------------------------------------------------------------------------------*
+
+		do $scripts/03d_by_FDITYPE
 	
+	
+
 	log close
-	translate $log/03a_PSM.smcl $log/03a_PSM.pdf , ///
+	translate $log/fdi_matching,.smcl $log/fdi_matching,.pdf , ///
 	trans(smcl2pdf) replace 	
 	
-	erase $log/03a_PSM.smcl
-
-*------------------------------------------------------------------------------*
-*	PART 3.2: NNM (>1 neighbours, including caliper specifications)
-*------------------------------------------------------------------------------*
-
-	cap log close
-	log using $log/03b_NNM, replace
-
-			do $scripts/03b_NNM
-	
-	log close
-	translate $log/03b_NNM.smcl $log/03b_NNM.pdf , ///
-	trans(smcl2pdf) replace 	
-	
-	erase $log/03b_NNM.smcl
+	erase $log/fdi_matching,.smcl
 
 
-*------------------------------------------------------------------------------*
-*	PART 3.3: AIPW
-*------------------------------------------------------------------------------*
 
-	cap log close
-	log using $log/03c_AIPW, replace
-
-			do $scripts/03c_AIPW
-	
-	log close
-	translate $log/03c_AIPW.smcl $log/03c_AIPW.pdf , ///
-	trans(smcl2pdf) replace 	
-	
-	erase $log/03c_AIPW.smcl
-	
-	
-********************************************************************************
-*			PART 4: Robustness Checks 
-********************************************************************************
-
-	cap log close
-	log using $log/04a_Robustness, replace
-
-			do $scripts/04a_Robustness
-	
-	log close
-	translate $log/04a_Robustness.smcl $log/04a_Robustness.pdf , ///
-	trans(smcl2pdf) replace 	
-	
-	erase $log/04a_Robustness.smcl
 
 
 
