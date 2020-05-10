@@ -5,7 +5,7 @@
 															   Empirical Project
 																	  Do-File 02
 		
-		PURPOSE:	Analysis of Data Set
+		PURPOSE:	Analysis of Dataset
 		
 		OUTLINE:	PART 1:	Overview
 					PART 2: Summary Statistics
@@ -46,10 +46,9 @@
 	tab RD2015
 	
 *------------------------------------------------------------------------------*
-*	PART 2.1: Checking for Outliers
+*	PART 2.1: Checking for Outliers in employment variable
 *------------------------------------------------------------------------------*
 
-//	Employment
 	set scheme plotplainblind
 	scatter TFP2017 emp2015, ytitle("TFP in 2017")	
 	graph save $results/02_Descriptive_Analysis/emp2015_outliers.gph, ///
@@ -63,16 +62,15 @@
 *					PART 3: Balance Tables
 ********************************************************************************
 	
-//			By treatment variable
+//			By treatment variable 
 iebaltab 	TECH PORT ///
 			logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, ///
 			grpvar(FDI2016) ///
 			savetex("$results/02_Descriptive_Analysis/baltest_byfdi_pre.tex") ///
 			rowvarlabels texdoc replace
 
-//	-> Significant differnces betw. treatment and control group in all respects	
 		
-//			By FDI type (treatment arms)
+//			By FDI type (treatment arms) [not reported in paper]
 iebaltab 	TECH PORT ///
 			logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015, ///
 			grpvar(FDITYPE2016) ///
