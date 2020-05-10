@@ -62,15 +62,20 @@ tebalance summarize
 teffects aipw (TFPST2017   i.($S) c.($P) )(FDI2016 c.($P) i.($S)  ) ///
 	if FDITYPE2016==1 | FDITYPE2016==0
 
+tebalance summarize
+	
 outreg2 using $results\04_bytype\bytype_table_1.tex, append dec(3) ///
 	drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) ///
 	nocon eqdrop(OME0 OME1 TME1)
+
 
 
 *AIPW Logit type2
 
 teffects aipw (TFPST2017   i.($S) c.($P) )(FDI2016 c.($P) i.($S)  ) ///
 	if FDITYPE2016==2 | FDITYPE2016==0
+
+tebalance summarize
 
 outreg2 using $results\04_bytype\bytype_table_1.tex, append dec(3) ///
 	drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) ///
@@ -81,6 +86,8 @@ outreg2 using $results\04_bytype\bytype_table_1.tex, append dec(3) ///
 
 teffects aipw (TFPST2017   i.($S) c.($P) )(FDI2016 c.($P) i.($S)  ) ///
 	if FDITYPE2016==3 | FDITYPE2016==0
+
+tebalance summarize
 
 outreg2 using $results\04_bytype\bytype_table_1.tex, append dec(3) ///
 	drop(i.OWN i.PORT logwages2015 TFP2015 logemp2015 DEBTS2015 EXP2015 RD2015 ) ///
