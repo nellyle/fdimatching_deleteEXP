@@ -26,7 +26,7 @@
 
 	corr	FDI2016 ///
 			OWN TECH PORT ///
-			logwages2015 TFP2015 emp15 DEBTS2015 EXP2015 RD2015 
+			logwages2015 TFP2015 emp2015 DEBTS2015 EXP2015 RD2015 
 
 	
 ********************************************************************************
@@ -36,14 +36,14 @@
 //	Continuous variables	
 	outreg2 using "$results/02_Descriptive_Analysis/summarystats.tex", ///
 	sum(detail) replace ///
-	keep(wages15 TFP2015 debts15 EXP2015 emp15) ///
+	keep(wages15 TFP2015 debts15 EXP2015 emp2015) ///
 	label eqkeep(mean p50 sd min max)
 	
 //	Categorical variables
 	tab PORT
 	tab OWN
 	tab TECH
-	tab DEBTS2015
+	tab RD2015
 	
 *------------------------------------------------------------------------------*
 *	PART 2.1: Checking for Outliers
@@ -51,11 +51,11 @@
 
 //	Employment
 	set scheme plotplainblind
-	scatter TFP2017 emp15, ytitle("TFP in 2017")	
-	graph save $results/02_Descriptive_Analysis/emp15_outliers.gph, ///
+	scatter TFP2017 emp2015, ytitle("TFP in 2017")	
+	graph save $results/02_Descriptive_Analysis/emp2015_outliers.gph, ///
 	replace
 
-	graph export $results/02_Descriptive_Analysis/emp15_outliers.png, ///
+	graph export $results/02_Descriptive_Analysis/emp2015_outliers.png, ///
 	as(png) replace
 
 

@@ -19,24 +19,37 @@
 ********************************************************************************
 			PART 1: Prepare Folder Paths
 *******************************************************************************/
+	
+	global root	"C:\Users\Emilie\Documents\Emilie\Master\Nottingham\2_Appl_Microeconometrics\fdimatching_deleteEXP"
 
 	cap log close
-	log using $log/fdi_matching, replace
+	log using $root/log_fdi_matching, replace
 	clear all
 	
 *------------------------------------------------------------------------------*
-*	PART 1.1: Set globals for do-file routines
+*	PART 1.0: Download Packages
 *------------------------------------------------------------------------------*
 
-//	Adjust root file:	
-	global root	"C:\Users\schne\Documents\GitHub\try\fdimatching_deleteEXP"
+//	package gr0070 from http://www.stata-journal.com/software/sj17-3
+	cap ssc install gr0070
+	
+//	package outreg2
+	cap ssc install outreg2
+	
+//	package tabout
+	cap ssc install tabout
 
+*------------------------------------------------------------------------------*
+*	PART 1.1: Set globals for do-file routines
+*------------------------------------------------------------------------------*
+	
 	global input	"$root/01_input"
 	global scripts	"$root/02_scripts"
 	global log	"$root/03_log"
 	global results	"$root/04_results"
 	
 	use "$input/FDI_project"
+
 
 *------------------------------------------------------------------------------*
 *	PART 1.2: Adjust variable labels
@@ -60,7 +73,11 @@
 
 	generate TFPS17=  (TFP2017-3.656046)/2.056464
 	generate emp2015= exp(logemp2015)
+	generate wages15 = exp(logwages2015)
+	generate debts15 = exp(DEBTS2015)
 
+	save $input/fdi_matching_clean, replace
+	
 *------------------------------------------------------------------------------*
 *	PART 1.4: Set globals for variables
 *------------------------------------------------------------------------------*
@@ -95,15 +112,15 @@
 *	PART 3.3: Analysis by  Type of FDI
 *------------------------------------------------------------------------------*
 
-		do $scripts/03d_by_FDITYPE
+		do $scripts/03c_by_FDITYPE
 	
 	
 
 	log close
-	translate $log/fdi_matching,.smcl $log/fdi_matching,.pdf , ///
+	translate $root/log_fdi_matching.smcl $root/log_fdi_matching.pdf , ///
 	trans(smcl2pdf) replace 	
 	
-	erase $log/fdi_matching,.smcl
+	erase $root/log_fdi_matching.smcl
 
 
 

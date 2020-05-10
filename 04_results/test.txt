@@ -1,9 +1,0 @@
-	(1)
-VARIABLES	TFPST2017
-	
-r1vs0.FDI2016	0.127***
-	(0.0175)
-	
-Observations	11,323
-Standard errors in parentheses	
-*** p<0.01, ** p<0.05, * p<0.1	
