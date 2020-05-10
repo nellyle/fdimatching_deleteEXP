@@ -23,6 +23,8 @@
 
 	teffects aipw (TFPS17  i.($F) c.($C) )(FDITYPE2016  i.($F) c.($C) ) 
 	
+	tebalance summarize 	
+	
 	teffects overlap, ptlevel(1) ///
 		saving($results\04_bytype\bytype_overlap_l1.gph, replace)
 	
@@ -36,19 +38,20 @@
 		drop(OWN TECH RD2015 logwages2015 TFP2015 emp2015 DEBTS2015) ///
 		nocon eqdrop(OME0 OME1 OME2 OME3 TME1 TME2 TME3) lab()
 
-	tebalance summarize 
 
 *------------------------------------------------------------------------------*
 *	PART 1.2:	IPW
 *------------------------------------------------------------------------------*
 
 	teffects ipw (TFPS17 )(FDITYPE2016  i.($F) c.($C))
-
+	
+	tebalance summarize
+	
 	outreg2  using $results\04_bytype\bytype_table_1.tex, append dec(3) ///
 		drop(OWN TECH RD2015 logwages2015 TFP2015 emp2015 DEBTS2015) ///
 		nocon eqdrop(OME 0 OME1 OME2 OME3 TME1 TME2 TME3)
 
-	tebalance summarize
+
 
 
 ********************************************************************************
@@ -56,35 +59,52 @@
 ********************************************************************************
 
 *------------------------------------------------------------------------------*
-*	PART 2.1:	AIPW
+*	PART 2.1:	AIPW Logit
 *------------------------------------------------------------------------------*
 
-*AIPW Logit type1 
+*=============================*
+* Type 1 (Exports-oriented FDI) 
+*=============================*
+//	Type 0: No FDI 
 
 	teffects aipw (TFPS17   i.($F) c.($C) )(FDI2016 c.($C) i.($F)  ) ///
 		if FDITYPE2016==1 | FDITYPE2016==0
 
+	tebalance summarize		
+
 	outreg2 using $results\04_bytype\bytype_table_1.tex, append dec(3) ///
 		drop(OWN TECH RD2015 logwages2015 TFP2015 emp2015 DEBTS2015) ///
 		nocon eqdrop(OME0 OME1 TME1)
 
 
-*AIPW Logit type2
+*=================================*
+* Type 2(Technology intensive FDI) 
+*=================================*
 
 	teffects aipw (TFPS17   i.($F) c.($C) )(FDI2016 c.($C) i.($F)  ) ///
 		if FDITYPE2016==2 | FDITYPE2016==0
 
+	tebalance summarize
+	
 	outreg2 using $results\04_bytype\bytype_table_1.tex, append dec(3) ///
 		drop(OWN TECH RD2015 logwages2015 TFP2015 emp2015 DEBTS2015) ///
 		nocon eqdrop(OME0 OME1 TME1)
 
 
-*AIPW Logit type3
+*====================================*
+* Type 3(Domestic market seeking FDI) 
+*====================================*
 
 	teffects aipw (TFPS17   i.($F) c.($C) )(FDI2016 c.($C) i.($F)  ) ///
 		if FDITYPE2016==3 | FDITYPE2016==0
 
+	tebalance summarize
+	
 	outreg2 using $results\04_bytype\bytype_table_1.tex, append dec(3) ///
 		drop(OWN TECH RD2015 logwages2015 TFP2015 emp2015 DEBTS2015) ///
 		nocon eqdrop(OME0 OME1 TME1)
+
+
+
+
 
